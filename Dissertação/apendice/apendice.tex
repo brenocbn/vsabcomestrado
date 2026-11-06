@@ -1,0 +1,433 @@
+%%
+%% Capítulo 6: Apêndices
+%%
+
+\mychapter{VS-ABC Utilizando Filtros K}
+\label{Cap:apendice}
+
+\section{Introdução}
+
+Considere-se o sistema SISO (\textit{Single Input Single Output}), LTI (\textit{Linear Time Invariant}) e com grau relativo unitário, ou seja, $\rho=1$, descrito por
+
+\begin{equation} \label{sista}
+\frac{y\left(s\right)}{u\left(s\right)}=\frac{b_{n-1}s^{n-1}+\cdots{}+b_1s+b_0}{s^n+a_{n-1}s^{n-1}+\cdots{}+a_0}
+\end{equation}
+onde os parâmetros $b_{n-1} \cdots b_0$ e $a_{n-1} \cdots a_0$ são constantes, mas desconhecidos ou conhecidos com incertezas. O erro de saída é definido como
+
+\begin{equation} \label{errza}
+z=y-y_r.
+\end{equation}
+
+O objetivo é fazer com que $y$, que é a saída do sistema, siga a saída do modelo de referência, $y_r$, levando o erro $z\rightarrow0$, mantendo todos os sinais em malha fechada uniformemente limitados. Para tal, algumas suposições são necessárias:
+
+\begin{itemize}
+\item  Hipótese H1: A referência $y_r(t)$ pode ser a saída de um modelo de referência com entrada $r(t)$ contínua por partes, ou um sinal cuja primeira derivada é conhecida, limitada e contínua por partes;
+\item  Hipótese H2: O sinal do ganho de alta frequência ($sgn(b_{n-1})$) é conhecido;
+\item  Hipótese H3: A planta é de fase mínima, ou seja, o polinômio $b_{n-1}s^{n-1}+\cdots{}+b_1s+b_0$ é \textit{Hurwitz};
+\item  Hipótese H4: O grau relativo do modelo de referência é o mesmo grau relativo da planta.
+\end{itemize}
+
+\section{Filtros de Estimação (Filtros K)}
+
+Representando o sistema (\ref{sista}) na forma canônica observável
+
+\begin{equation} \label{fcobsa}
+\begin{array}{
+ccc}
+{\dot{x}}_1=x_2-a_{n-1}y \\
+\vdots{} \\
+\begin{array}{
+cc}
+{\dot{x}}_{\rho{}-1}=x_{\rho{}}-a_{m+1}y \\
+\begin{array}{
+ccc}
+{\dot{x}}_{\rho{}}=x_{\rho{}+1}-a_my+b_mu \\
+\vdots{} \\
+\begin{array}{
+cc}
+{\dot{x}}_{n-1}=x_n-a_1y+b_1u \\
+{\dot{x}}_n=-a_0y+b_0u \\
+y=x_1.
+\end{array}
+\end{array}
+\end{array}
+\end{array}
+\end{equation}
+ou, mais compactamente, como
+
+\begin{equation} \label{sistres}
+\begin{array}{lll}
+\dot{x} & = & Ax-ya+\left[\begin{array}{c} 0_{(\rho-1)\times1} \\ b \end{array}\right]u \\
+y				& = & e^T_1x
+\end{array}
+\end{equation}
+onde
+
+\begin{equation} \label{matrix}
+\begin{array}{ccc}
+A=\left[\begin{array}{ccc}
+0				&					&	I_{n-1}	\\
+\vdots	&					&					\\
+0				& \cdots	&	0				\\
+\end{array}\right],
+&
+a=\left[\begin{array}{c}
+a_{n-1}	\\
+\vdots	\\
+a_0			\\
+\end{array}\right],
+&
+b=\left[\begin{array}{c}
+b_{n-1}	\\
+\vdots	\\
+b_0			\\
+\end{array}\right]
+\end{array}
+\end{equation}
+A representação do sistema (\ref{sistres}) pode ainda ser reescrita como
+
+\begin{equation} \label{sistres2}
+\begin{array}{lll}
+\dot{x} & = & Ax+F(y,u)^T\theta \\
+y				& = & e^T_1x
+\end{array}
+\end{equation}
+onde 
+
+\begin{equation}\label{funcao}
+F(y,u)^T=\left[\begin{array}{cc} 
+\left[\begin{array}{c}
+0_{(\rho-1)\times{}n}	\\
+I_{n}									\\
+\end{array}\right]u
+&
+-I_ny
+\end{array}\right]
+\end{equation}
+e o vetor de parâmetros
+
+\begin{equation} \label{ttaa}
+\theta=\left[\begin{array}{c} b \\ a \end{array}\right] = 
+\left[\begin{array}{c} b_{n-1} \\ \vdots \\ b_0 \\ a_{n-1} \\ \vdots \\ a_0 \end{array}\right]
+\end{equation}
+Para estimação de estado, os seguintes filtros serão usados
+
+\begin{equation}\label{fil01}
+\begin{array}{lll}
+\dot{\xi}				&	=	&	A_0\xi+ky	\\
+\dot{\Omega}^T	&	=	&	A_0\Omega + F(y,u)^T \\
+\end{array}
+\end{equation}
+onde o vetor $k=[\begin{array}{ccc} k_1 & \cdots & k_n \end{array}]^T$ é escolhido de forma que a matriz
+
+\begin{equation} \label{azero}
+A_0=A-ke^T_1
+\end{equation}
+seja \textit{Hurwitz}, e $P$ existe tal que
+
+\begin{equation} \label{pe}
+\begin{array}{cc}
+PA_0+A^T_0P=-I,
+&
+P=P^T>0
+\end{array}
+\end{equation}
+Utilizando \ref{fil01} a estimação de estado é dada por
+
+\begin{equation} \label{xch}
+\hat{x}=\xi+\Omega^T\theta
+\end{equation}
+sendo possível demonstrar que o erro de estimação
+
+\begin{equation} \label{erroest}
+\epsilon=x-\hat{x}
+\end{equation}
+desaparece exponencialmente, uma vez que
+
+\begin{equation}\label{derro}
+\dot{\epsilon}=A_0\epsilon
+\end{equation}
+
+Um passo adicional em (\ref{fil01}) corresponde a reduzir a dinâmica do filtro $\Omega$, explorando a estrutura $F(y,u)$ em (\ref{funcao}). Sejam as $n$ primeiras colunas de $\Omega^T$ denotadas por $v_{n-1},\cdots,v_1,v_0$, e outras $n$ colunas por $\Xi$,
+
+\begin{equation}\label{omeg}
+\Omega^T=\left[\begin{array}{ccccc}
+v_{n-1}	&	\cdots	&	v_1	&	v_0	&	\Xi
+\end{array}\right]
+\end{equation}
+Em virtude da dependência especial de $F(y,u)$ em relação a $u$, as equações para as $n$ primeiras colunas de $\Omega^T$ são governadas por
+
+\begin{equation}\label{vpon}
+\begin{array}{cc}
+\dot{v}_j=A_0v_j+e_{n-1}u, & j=0\cdots{}n-1
+\end{array}
+\end{equation}
+Isto significa que, graças à estrutura particular de $A_0$,
+
+\begin{equation}\label{azeroe}
+\begin{array}{cc}
+A^j_0e_n=e_{n-j}, & j=0\cdots{}n-1
+\end{array}
+\end{equation}
+os vetores $v_j$ podem ser obtidos pelo filtro
+
+\begin{equation} \label{fil02}
+\dot{\lambda}=A_0\lambda+e_nu
+\end{equation}
+através da sua expressão algébrica
+
+\begin{equation}\label{vjota}
+\begin{array}{cc}
+v_j=A^j_0\lambda	&	j=0\cdots{}n-1
+\end{array}
+\end{equation}
+Similarmente, $\Xi$, governado por
+
+\begin{equation}\label{quisi}
+\begin{array}{cc}
+\dot{\Xi}=A_0\Xi-Iy,	&	\Xi\in\mathbb{R}^{n\times{}n}
+\end{array}
+\end{equation}
+pode ser obtido a partir do filtro
+
+\begin{equation}\label{fil03}
+\dot{\eta}=A_0\eta+e_ny
+\end{equation}
+através da expressão algébrica
+
+\begin{equation}\label{quis}
+\Xi=-\left[\begin{array}{cccc}
+A^{n-1}+0\eta	&	\cdots	&	A_0\eta	&	\eta
+\end{array}\right]
+\end{equation}
+Finalmente, com a identidade
+
+\begin{equation}\label{azeroen}
+A^n_0e_n=-k
+\end{equation}
+o vetor $\xi$ em (\ref{fil01}) pode ser obtido de (\ref{fil03}) com uso da expressão
+
+\begin{equation}\label{xii}
+\xi=-A^n_0\eta
+\end{equation}
+
+Na Tabela \ref{tab:filtros} encontram-se resumidos os filtros K.
+
+\begin{table}[th]
+	\caption{Filtros K para sistemas lineares SISO com grau relativo unitário}
+	\centering
+	\begin{tabular}{|c|}
+	\hline
+	$\begin{array}{lll}
+	\dot{\eta}		&	=	&	A_0\eta+e_ny		\\
+	\dot{\lambda}	&	=	&	A_0\lambda+e_nu	\\
+	\end{array}$												\\
+	\hline
+	$\begin{array}{lll}
+	\dot{\eta}		&	=	&	A_0\eta+e_ny														\\
+	\Xi						&	=	&	-\left[\begin{array}{cccc}
+										A^{n-1}_0\eta	&	\cdots	&	A_0\eta	&	\eta
+										\end{array}\right]												\\
+	\xi						&	=	&	-A^n_0\eta															\\
+	v_j						&	=	&	\begin{array}{cccc}
+										A^j_0\lambda,	&	j=0\cdots{}n-1	
+										\end{array}																\\
+	\Omega^T			&	=	&	\left[\begin{array}{ccccc}
+										v_m	&	\cdots	&	v_1	&	v_0	&	\Xi
+										\end{array}\right]												\\
+	\end{array}$																								\\
+	\hline
+	\end{tabular}
+	\label{tab:filtros}
+\end{table}	
+
+\section{Controlador Adaptativo \textit{Backstepping}}
+
+Como projeto do controlador será realizado para plantas com grau relativo unitário, este fica restrito a equação
+
+\begin{equation}\label{sistx1}
+{\dot{x}}_1=x_2-a_{n-1}y+b_{n-1}u=x_2-e^T_1a+b_{n-1}u
+\end{equation}
+Através de (\ref{xch}) e (\ref{erroest}), a variável $x_2$ pode ser obtida como
+
+\begin{equation}\label{x2}
+\begin{array}{lll}
+x_2	&	=	&	\xi_2+\Omega^T_{(2)}\theta+\epsilon_2	\\
+		&	=	&	\xi_2+\left[\begin{array}{ccccc}
+v_{n-1,2}	&	\cdots	&	v_1,2	&	v_0,2	&	\Xi_{(2)}
+\end{array}\right]\theta+\epsilon_2							\\
+\end{array}
+\end{equation}
+Substituindo o resultado acima em (\ref{x2}), temos
+
+\begin{equation}\label{x12}
+\begin{array}{lll}
+\dot{x_1}	&	=	&	\xi_2+\left[\begin{array}{ccccc}
+								v_{n-1,2}	&	\cdots	&	v_1,2	&	v_0,2	&	\Xi_{(2)}
+								\end{array}\right]\theta+\epsilon_2+b_{n-1}u		\\
+					&	=	&	\xi_2+\left[\begin{array}{ccc}
+								\omega_1	&	\cdots	&	\omega_{2n}
+								\end{array}\right]\theta+\epsilon_2+b_{n-1}u		\\
+					&	=	&	\xi_2+\omega^T\theta+\epsilon_2+b_{n-1}u				\\
+\end{array}
+\end{equation}
+onde $\omega$ é o vetor regressor. Assim, a derivada do erro de saída (\ref{errza}) com o uso de (\ref{x12}) é dada por
+
+\begin{equation}\label{ezp}
+\dot{z}=\dot{y}-\dot{y_r}=\dot{x_1}-\dot{y_r}=\xi_2+\omega^T\theta+\epsilon_2+b_{n-1}u - \dot{y_r}
+\end{equation}
+Seja a lei de controle
+
+\begin{equation}\label{ua}
+u=\varrho{}\bar{u}
+\end{equation}
+onde $\hat{\varrho}$ é uma estimativa para $1/b_{n-1}$, e em seguida definindo
+
+\begin{equation}\label{parerro}
+\begin{array}{lll}
+\tilde{\theta}	&	=	&	\theta-\hat{\theta}	\\
+\tilde{\varrho}	&	=	&	\varrho-\hat{\varrho}\\
+\end{array}
+\end{equation}
+obtemos
+
+\begin{equation}\label{ezp1}
+\begin{array}{lll}
+\dot{z}	&	=	&	\xi_2+\omega^T\theta+\epsilon_2+b_{n-1}\hat{\varrho}\bar{u} - \dot{y_r}	\\
+				&	=	&	\xi_2+\omega^T\theta+\epsilon_2-b_{n-1}\tilde{\varrho}\bar{u}+\bar{u}-\dot{y_r} \\
+\end{array}
+\end{equation}
+Considere-se a seguinte candidata a Função de Lyapunov
+
+\begin{equation}\label{lya1}
+V=\dfrac{1}{2}z^2+\dfrac{1}{2}\tilde{\theta}^T\Gamma^{-1}\tilde{\theta}+\dfrac{|b_{n-1}|}{2\gamma}\tilde{\varrho}^2+\dfrac{1}{4d_1}\epsilon^TP\epsilon>0
+\end{equation}
+com $\Gamma^{-1}>0$, $\gamma>0$ e $d_1>0$, sua derivada obtida através de (\ref{pe}) e (\ref{derro}), e substituindo (\ref{ezp})
+
+\begin{equation}\label{dlya1}
+\begin{array}{lll}
+\dot{V}	&	=	&	z(\xi_2+\omega^T\theta+\epsilon_2+b_{n-1}u - \dot{y_r})		\\
+				& 		& -\tilde{\theta}^T\Gamma^{-1}\dot{\hat{{\theta}}}-\dfrac{|b_{n-1}|}{\gamma}\tilde{\varrho}\dot{\hat{{\varrho}}}+\dfrac{1}{4d_1}\epsilon^T\epsilon \\
+\end{array}
+\end{equation}
+Selecionando a lei de controle auxiliar como
+
+\begin{equation}\label{ubara}
+\begin{array}{cc}
+\bar{u}=-c_1z-d_1z-\xi_2-\omega^T\theta+\dot{y}_r,	&	c_1>0
+\end{array}
+\end{equation}
+e as leis de adaptação dos parâmetros como
+
+\begin{equation}\label{tetaa}
+\dot{\hat{\theta}}=\Gamma{}\omega{}z
+\end{equation}
+
+\begin{equation}\label{varo}
+\dot{\hat{\varrho}}=-\gamma{}sgn(b_{n-1})\bar{u}z
+\end{equation}
+onde $\Gamma$ e $\gamma$ são os ganhos adaptativos, tem-se finalmente
+
+\begin{equation}\label{dlya2}
+\dot{V}(z,\tilde{\theta},\tilde{\varrho},\epsilon)\leq{}c_1z^2\leq{}0
+\end{equation}
+
+O resultado acima garante que $[\begin{array}{cccc} z & \tilde{\theta}	& \tilde{\varrho}	& \epsilon \end{array}]^T=[\begin{array}{cccc} 0 & 0	& 0	& 0 \end{array}]^T$ é um ponto de equilíbrio estável. Através do teorema de LaSalle-Yoshizawa, é possível que mostrar que $z(t)\rightarrow0$ quando $t\rightarrow\infty$.
+
+\section{Controlador Adaptativo \textit{Backstepping} a Estrutura Variável}
+
+A partir da seção anterior, leis integrais são propostas para substituir as leis integrais (\ref{tetaa}-\ref{varo})Considere-se uma nova candidata a função de Lyapunov
+
+\begin{equation}\label{lya2}
+V=\dfrac{1}{2}z^2+\dfrac{1}{2d_1}\epsilon^TP\epsilon>0
+\end{equation}
+e sua respectiva derivada
+
+\begin{equation}\label{dlya3}
+\dot{V}=z\dot{z}-\dfrac{1}{2d_1}\epsilon^T\epsilon
+\end{equation}
+Substituindo (\ref{ezp}) e (\ref{ubara}) em (\ref{dlya3}), obtemos
+
+\begin{equation}\label{dlya3}
+\begin{array}{lll}
+\dot{V}	&	=	& -c_1z^2+\omega^T\tilde{\theta}z-b_{n-1}\tilde{\varrho}\bar{u}z-\dfrac{1}{4d_1}\epsilon^T\epsilon-d_1z^2+z\epsilon_2-\dfrac{1}{4d_1}\epsilon^T\epsilon \\
+				&		&	-c_1z^2+\omega^T\tilde{\theta}z-b_{n-1}\tilde{\varrho}\bar{u}z-\dfrac{1}{4d_1}\epsilon^T\epsilon																											\\		
+				&		&	-d_1\left(z-\dfrac{1}{2d_1}\epsilon_2\right)^2-\dfrac{1}{4d_1}(\epsilon_1^2+\epsilon_2^2+\cdots+\epsilon_n^2)		\\
+\end{array}				
+\end{equation}
+Então,
+
+\begin{equation}\label{dlya4}
+\dot{V}\leq{}-c_1z^2+\displaystyle\sum_{i=1}^{2n}\tilde{\theta}_i\omega_iz-b_{n-1}\tilde{\varrho}\bar{u}z-\dfrac{1}{4d_1}\epsilon^T\epsilon
+\end{equation}
+e utilizando as leis chaveadas
+
+\begin{equation}\label{vsteta}
+\begin{array}{cc}
+\hat{\theta}_i=\bar{\theta}_isgn(\omega_iz), & \bar{\theta}_i>|\theta_i|
+\end{array}
+\end{equation}
+
+\begin{equation}\label{vsvaro}
+\begin{array}{cc}
+\hat{\varrho}=-\bar{\varrho}sgn(b_{n-1})sgn(\bar{u}z), & \bar{\varrho}>\dfrac{1}{|b_{n-1}|} \\
+\end{array}
+\end{equation}
+em (\ref{dlya4}), tem-se
+
+\begin{equation}\label{dlya5}
+\begin{array}{lll}
+\dot{V}	&	\leq{}	&	-c_1z^2-\dfrac{1}{4d_1}\epsilon^T\epsilon+\displaystyle\sum_{i=1}^{2n}(\theta_i\omega_iz-\bar{\theta}_i|\omega_iz|)	\\
+				&					&	-b_{n-1}(\varrho\bar{u}z+\bar{\varrho}|\bar{u}z|)	\\
+\end{array}
+\end{equation}
+O novo resultado é
+
+\begin{equation}\label{dlya6}
+\dot{V}\leq{}-c_1z^2-\dfrac{1}{4d_1}\epsilon^T\epsilon<0
+\end{equation}
+garantindo que $[\begin{array}{cc} z & \epsilon \end{array}]^T=[\begin{array}{cc} 0 & 0 \end{array}]^T$ é um ponto de equilíbrio globalmente assintoticamente estável, uma vez que (\ref{dlya6}) é definida negativa.
+
+\section{Resumo dos Controladores}
+
+A Tabela \ref{tab:resk} reúne as expressões para os controladores adaptativo \textit{backstepping} e VS-ABC.
+
+\begin{table}[htbp]
+	\caption{Resumo dos controladores adaptativos \textit{backstepping} e VS-ABC para plantas com grau relativo unitário.}
+	\large
+	\centering
+		\begin{tabular}{cccc}
+		\hline
+		\multicolumn{4}{|c|}{\textbf{Equações Comuns}} \\
+		\hline
+		\multicolumn{2}{|c|}{} & \multicolumn{2}{|l|}{Sinal de Controle:}\\ 
+		
+		\multicolumn{2}{|l|}{Erro de Saída} & \multicolumn{2}{|l|}{$u=\hat{\varrho}\bar{u}$}\\
+		
+		\multicolumn{2}{|l|}{$z=y-y_r$} &                 	  \multicolumn{2}{|l|}{$\bar{u}=-c_1z-d_1z-\xi_2-\omega^T\theta+\dot{y}_r$}\\
+		\hline
+		\multicolumn{4}{|l|}{Vetor Regressor:} \\
+		\multicolumn{1}{|l}{} & \multicolumn{3}{l|}{$\begin{array}{lll} \omega^T	&	=	&	[\begin{array}{ccc} \omega_1	&	\cdots	&	\omega_{2n}\end{array}] \\ 
+		&	=	&	[\begin{array}{cccc} v_{n-1,2}	&	\cdots	&	v_{0,2} & \Xi_{(2)}-ye^T_1\end{array}]\end{array}$} \\
+		\hline
+		\multicolumn{4}{|l|}{Filtros K: ver tabela \ref{tab:filtros}}\\
+		\hline
+		\multicolumn{4}{|c|}{\textbf{Controlador Adaptativo \textit{Backstepping}}} \\
+		\hline
+		\multicolumn{4}{|l|}{Leis Adaptativas:} \\
+		\multicolumn{4}{|l|}{$\dot{\hat{\theta}}=\Gamma{}\omega{}z$} \\
+		\multicolumn{4}{|l|}{$\dot{\hat{\varrho}}=-\gamma{}sgn(b_{n-1})\bar{u}z$} \\	
+		\hline
+		\multicolumn{4}{|c|}{\textbf{VS-ABC}} \\
+		\hline
+		\multicolumn{4}{|l|}{Leis Chaveadas:} \\
+		\multicolumn{4}{|l|}{$\begin{array}{cc}
+\hat{\theta}_i=\bar{\theta}_isgn(\omega_iz), & \bar{\theta}_i>|\theta_i|
+\end{array}$} \\
+		\multicolumn{4}{|l|}{$\begin{array}{cc}
+\hat{\varrho}=-\bar{\varrho}sgn(b_{n-1})sgn(\bar{u}z), & \bar{\varrho}>\dfrac{1}{|b_{n-1}|} \\
+\end{array}$} \\
+		\hline
+		\end{tabular}
+		\label{tab:resk}
+\end{table}

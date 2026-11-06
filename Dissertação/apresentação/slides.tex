@@ -1,0 +1,291 @@
+\documentclass{beamer}
+
+\usepackage[T1]{fontenc}        % fontes PS com acentos
+\usepackage[english,brazil]{babel}  % idiomas permitidos
+\usepackage[latin1]{inputenc}       % edição direta com acentos
+\usepackage{subfigure}          % tratamento de sub-figuras
+\usepackage{multirow}           % tratamento de várias linhas
+\usepackage{multicol}           % tratamento de vários culunas
+%\usepackage{epsfig}            % tratamento de figuras EPS
+%\usepackage{apalike}           % referência bibliografica
+%\usepackage{amstext}
+%\usepackage{amssymb}
+%\usepackage{amsmath}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%                  estilos                                %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\usepackage{beamerthemebars}
+%\usepackage{beamerthemeclassic}
+%\usepackage{beamerthemecompatibility}
+%\usepackage{beamerthemelined}
+%\usepackage{beamerthemeplain}
+%\usepackage{beamerthemeshadow}
+%\usepackage{beamerthemesidebar}
+%\usepackage{beamerthemesplit}
+%\usepackage{beamerthemetree}
+%\usepackage{beamerthemeAntibes}
+%\usepackage{beamerthemeBergen}   +-
+%%%%\usepackage{beamerthemeBerkeley}
+%\usepackage{beamerthemeBerlin} 
+%\usepackage{beamerthemeBoadilla}  %good
+\usepackage{beamerthemeboxes}
+%\usepackage{beamerthemeCopenhagen}
+%\usepackage{beamerthemeDarmstadt}
+%\usepackage{beamerthemedefault}
+%%%%%\usepackage{beamerthemeDresden}
+%%%%%\usepackage{beamerthemeFrankfurt}
+%\usepackage{beamerthemeGoettingen}
+%\usepackage{beamerthemeHannover}
+%%%%%\usepackage{beamerthemeIlmenau}
+%%%%%\usepackage{beamerthemeJuanLesPins}
+%\usepackage{beamerthemeLuebeck}
+%\usepackage{beamerthemeMadrid}
+%\usepackage{beamerthemeMalmoe}
+%\usepackage{beamerthemeMarburg}
+%\usepackage{beamerthemeMontpellier}
+%%%%%\usepackage{beamerthemePaloAlto}
+%\usepackage{beamerthemePittsburgh}
+%\usepackage{beamerthemeRochester}
+%\usepackage{beamerthemeSingapore}
+%\usepackage{beamerthemeSzeged}
+%\usepackage{beamerthemeWarsaw}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%                  cores                                  %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\usepackage{beamercolorthemedefault}
+%\usepackage{beamercolorthemealbatross}
+%\usepackage{beamercolorthemebeetle}
+\usepackage{beamercolorthemecrane}  %good
+%\usepackage{beamercolorthemedolphin}
+%\usepackage{beamercolorthemedove}
+%\usepackage{beamercolorthemefly}
+%\usepackage{beamercolorthemelily}
+%\usepackage{beamercolorthemeorchid}
+%\usepackage{beamercolorthemerose} tradicional
+%\usepackage{beamercolorthemeseagull}
+%\usepackage{beamercolorthemeseahorse}
+%\usepackage{beamercolorthemesidebartab}
+%\usepackage{beamercolorthemestructure}
+%\usepackage{beamercolorthemewhale}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\pgfdeclareimage[height=0.60cm]{logo}{DCArev}
+%\logo{\pgfuseimage{logo}}
+
+\title{Otimização e Controle de uma planta de inertização de resíduos por plasma térmico}
+\author{José Alberto Díaz Amado \\ \texttt{sportingjada1@hotmail.com}}
+\institute{Orientador: Prof. Dr. Andrés Ortiz Salazar}
+%\\[2ex] Co-orientador: Prof. Dr. Alberto Palacios Pawlovsky}
+\date{\today}
+%\date{16 julho de 2009}
+
+\begin{document}
+
+ \frame{\titlepage}
+
+%\section[Roteiro]{}
+%\frame{\tableofcontents}
+
+\section{Desenvolvimento do trabalho}
+
+ \frame
+ {
+    \frametitle{Desenvolvimento do Trabalho}
+
+    - Introdução
+        \begin{itemize}
+        \item Motivação.
+        \item Objetivo e Contribuções.
+        \end{itemize}
+    - Planta de Inertização do Lixo Tóxico
+       \begin{itemize}
+       \item Empresas
+       \item Funcionamento
+       \item Descripção dos subsistemas
+       \end{itemize}
+    - Otimização do Processo:
+        \begin{itemize}
+        \item Sensoriamento e Monitoramento
+        \item Controle da Tocha
+        \end{itemize}
+    - Conclusões
+    
+    - Cronograma        
+ }
+ \frame
+ {
+
+    \frametitle{Introdução}
+
+     - Motivação da pesquisa
+        
+        \begin{itemize}
+        \item Automação total da planta.
+        \end{itemize}
+
+     - Controle
+        \begin{itemize}
+        \item Estudar diferentes técnicas de controle avançado na tocha e na planta de inertização.
+        \item Estudar diferentes técnicas de otimização.
+        \end{itemize}
+ }
+
+\section{Descrição do problema}
+
+ \frame
+ {
+
+   \frametitle{Planta de Inertização de Resíduos por Plasma Térmico}
+
+    \begin{itemize}
+    \item Tem como objetivo eliminar material poluente para o meio ambiente (lixo, resíduo hospitalar, resíduos de petróleo, etc.. ).
+    \item Propõe o desenvolvimento de um sistema de controle para uma planta de processamento de resíduos e efluentes petroquímicos utilizando plasma térmico.
+    \item O sistema será basicamente composto por uma tocha a plasma, dois reatores (principal e secundário), um sistema de refrigeração da tocha, um sistema de lavagem de gases, um sistema de bombeamento de gases e uma fonte de alimentação operando na faixa de RF.
+    \item O sistema será monitorado por um $CLP$ e um microcomputador PC com uma interface homem-máquina $IHM$.
+    \end{itemize}
+ }
+ \frame
+ {
+
+ \frametitle{Planta de Inertização de Resíduos por Plasma Térmico}
+
+
+    \begin{figure}[htbp!] \centering
+    \includegraphics[scale=.34]{planta}
+    \end{figure}
+
+ }
+ \frame
+ {
+
+   \frametitle{Fonte de Rádio Frequência}
+
+    \begin{itemize}
+    \item Sua finalidade é excitar a tocha de plasma indutiva, assegurando a manutenção do jato plasmático nas condições fixadas pelo processo.
+
+    \item Conversor AC/DC: É utilizado para eliminar os harmónicas gerados pela fonte que reduzem o fator de potência , formado por:conversor boost trifásico , $DSP$ - monitoração e $PWM$, placa condicionadora de sinal - corrente e voltagem, Sensores de corrente, Barramento $DC$.
+
+    \item Conversor DC/AC: Trabalha em alta freqüência $450kH$, sobre um conjunto de quatro módulos inversores ressonantes a $IGBT's$, agrupados em configuração paralela e isolados da carga por um transformador $RF$ (acoplamento de impedâncias), potencia de saída $50KW$.
+
+
+    \end{itemize}
+ }
+ \frame
+ {
+
+ \frametitle{Fonte de Radio Frequência}
+
+
+    \begin{figure}[htbp!] \centering
+    \includegraphics[scale=.47]{InternoTocha}
+    \end{figure}
+
+ }
+ \frame
+ {
+
+  \frametitle{Tocha a plasma acoplado indutivamente $ICP$}
+
+    \begin{itemize}
+    \item As tochas a plasma acoplado indutivamente tem ocupado um espaço crescente, devido às suas propriedades estruturais e amplo campo de aplicações industriais.
+
+    \item A energia da fonte RF é transferida para o plasma por meio de um campo magnético oscilante, produzido por uma bobina de indução externa.
+
+    \item O campo elétrico induzido produz um fluxo de corrente que dá origem às correntes que aquecem o gás em altas temperaturas, mantendo-o em estado de condução através do fenômeno de ionização produzido pelo processo térmico de colisão das partículas.
+
+    \end{itemize}
+ }
+ \frame
+ {
+
+ \frametitle{Tocha a plasma acoplado indutivamente $ICP$}
+
+
+    \begin{figure}[htbp!] \centering
+    \includegraphics[scale=.48]{tochas}
+    \end{figure}
+
+ }
+
+
+
+ \section{proposta do doutorado}
+ \frame
+ {
+   \frametitle{Automação e Controle da Planta de Inertização de Resíduos por Plasma Térmico}
+   \begin{itemize}
+   \item Monitorar todas as variaveis utilizadas na planta
+   \item Comunicação Fonte RF com CLP.
+   \item Estudar estratégias de controle avanzado: PID, Fuzzy, Redes neurais, Neuro Fuzzy, etc.
+   \item Estudar estratégias de otimização.
+   \item Controle da Tocha (4 variaveis).
+   \item Controle da Planta ( Interação com todos os elementos dela )
+   \end{itemize}
+
+ }
+ \frame
+ {
+
+ \frametitle{Automação e controle da Planta de Inertização de Resíduos por Plasma Térmico}
+
+
+    \begin{figure}[htbp!] \centering
+    \includegraphics[scale=.32]{SistComp}
+    \end{figure}
+
+ }
+ \section{Estado da Arte}
+  \frame
+ {
+
+    \begin{itemize}
+     \item As informações atuais da planta de inertização forem obtidas por meio dos seguentes artigos e teses: { \bf Automation system applied to a plasma inertization plant; A 50Kw PFC three-phase rectifier for using in a plasma torch system, Luciano P. S. Júnior 2007 (artigo); Conversor CC/CA de alta frequência baseado em inversores ressonantes com comutação sequencial para excitação de uma tocha indutiva a plasma térmico, Dubut 2004 (qualificação doutorado) ; Desenvolvimento de sistema de controle para uma planta de inertização de resíduos por plasma, Alexander, 2004 (qualificação doutorado)}.
+
+     \item Combinação de duas fontes de energia para gerar um controle mais robusto na saída,{\bf Design of power control system using SMES and SVC for fusion power plant,K Niiyama e Hamajima 2008 (artigo)}.
+         \end{itemize}
+
+  }
+  \frame
+  {
+
+    \begin{itemize}
+
+    \item Discutidos as Características de corrente e voltagem na tocha, estabilidade do arco no plasma, característica do gradiente arco voltaico, analises da tocha plasmática, testes de temperatura do corpo da tocha, {\bf Performance of a plasma torch with hydrocarbon feedstocks for use in scramjet combustion, Jr. 1998 (MASTER of SCIENCE)}.
+
+    \item Numerosas técnicas forem desenvolvidas sendo utilizados para a medição do plasma com o propósito de validar e controlar processos on-line, técnicas baseadas em sinal óptica, acústica e elétrica, {\bf Diagnostics of thermal plasmas, Boulos, 2006 (Artigo)}.
+
+     \item Este relatório fala dos novos regimes de ignição plasmática e sistema de controle de intensidade, aplicados a mistura de ar e hidrocarbonetos, sistema de ignição de faisca é  reduzir o tempo até 100ns, {\bf Glow-to-Spark Transitions in a Plasma System for Ignition and Combustion Control, D. Korolev e Matveev 2007 (artigo)}.
+
+
+    \end{itemize}
+
+ }
+  \frame
+ {
+
+    \begin{itemize}
+
+      \item Apresenta exemplos de tecnologias com emprego do plasma térmico no tratamento de resíduos perigosos, incluindo resíduos orgânicos, são apresentados e discutidos os vários tipos de tochas a plasma, suas características, configurações e empregos mais adequados a cada tipo, {\bf O Plasma Térmico - Solução Final para os Resíduos Perigosos, Sichman n.d, 2006, (Relatório)}.
+
+      \item Avaliação de controle, utilizando combinações de Fuzzy, PID, Redes Neurais e Algoritmos Genéticos, {\bf Análise comparativa do desempenho de um Controlador Fuzzy acoplado a um PID Neural sintonizado por um Algoritmo Genético com Controladores Inteligentes Convencionais, R. 2007, (Dissertação)}
+          
+      \item Controle multi-variável da tocha, PID,  {\bf Magnetic Control of plasma current, position, and shape in tokamaks, Giuseppe A., 2005, (revista)}    
+
+
+
+    \end{itemize}
+
+ }
+ \frame
+ {
+   \begin{center}
+   \item Obrigado
+   \end{center}
+ }
+
+
+\end{document}

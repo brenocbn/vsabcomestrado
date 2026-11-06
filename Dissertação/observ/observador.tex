@@ -1,0 +1,246 @@
+%%
+%% Capítulo Observadores
+%%
+
+\mychapter{Observador de Estado}
+\label{cap:obs}
+
+
+\section{Observador de Luenberger}
+
+Considere a planta
+
+\begin{equation} \label{planobs}
+\begin{array}{ll}
+\dot{x}=Ax+Bu \\
+y=Cx
+\end{array}
+\end{equation}
+com $A$, $B$ e $C$ conhecidos. O observador de Luenberger pode ser definido como
+
+\begin{equation} \label{obsluen}
+\begin{array}{ll}
+\dot{\hat{x}}=A\hat{x}+Bu+L(y-\hat{y}),& \hat{x}(0)=\hat{x}_0 \\
+\hat{y}=C\hat{x}
+\end{array}
+\end{equation}
+onde $L$ é uma matriz a ser escolhida igualando a equação (\ref{det}) abaixo a um polinômio característico desejado, definido pelos critérios de desempenho desejado para a dinâmica do observador. 
+
+\begin{equation} \label{det}
+det[sI-(A-LC)]
+\end{equation}
+
+Este observador, apesar de simples, garante que as variáveis de estado estimadas convirjam para as variáveis de estado reais a partir de quaisquer condições iniciais, desde que o sistema seja observável e as matrizes $A$, $B$ e $C$ sejam conhecidas.
+
+\section{Observador Adaptativo de Luenberger}
+
+Considerando a partir de agora que tanto as variáveis de estado do sistema quanto os parâmetros são desconhecidos, é necessário estimá-los simultaneamente. Para este fim é utilizado o Observador Adaptativo de Luenberger.
+
+A forma mais simples de escolher a estrutura do observador adaptativo é usar a mesma equação do observador de Luenberger comum na equação (\ref{obsluen}), mas substituir as matrizes $A,B$ e $C$ por suas estimativas $\hat{A},\hat{B}$ e $\hat{C}$ respectivamente, geradas por alguma lei adaptativa. O problema deste procedimento é a incapacidade de estimar os $n^2+2n$ parâmetros de $A,B$ e $C$ a partir dos dados de entrada e da saída. A melhor alternativa neste caso, então, é estimar os $2n$ parâmetros da função de transferência da planta e usá-los para calcular $\hat{A},\hat{B}$ e $\hat{C}$. Estes cálculos, no entanto, nem sempre são possíveis devido a certas restrições estruturais do sistema. Para atender a estas restrições, representa-se a planta na forma canônica observável.
+
+\begin{equation} \label{pltobs}
+\begin{array}{l}
+\dot{x}_\alpha=\left[
+\begin{array}{ccc}
+			&	\vdots	&	I_{n-1} \\
+-a_p	& \vdots	&	\cdots	\\
+			&	\vdots	&		0			\\	
+\end{array}\right]x_\alpha+b_pu \\
+y=
+\begin{array}{cccc}
+[1 & 0 & \cdots & 0]x_\alpha
+\end{array}
+\end{array}
+\end{equation}
+onde $a_p=\begin{array}{cccc}[a_{n-1} & a_{n-2} & \cdots & a_0]\end{array}^T$ e $b_p=\begin{array}{cccc}[b_{n-1} & b_{n-2} & \cdots & b_0]\end{array}^T$. Os elementos de $a_p$ e $b_p$ são os coeficientes do denominador e do numerador, respectivamente, da função de transferência
+
+\begin{equation} \label{ft}
+\frac{y\left(s\right)}{u\left(s\right)}=\frac{b_{n-1}s^{n-1}+b_{n-2}s^{n-2}+\cdots+b_0}{s^n+a_{n-1}s^{n-1}+\cdots{}+a_0}
+\end{equation}
+e podem ser estimados a partir dos dados de entrada e saída da planta.
+
+O observador adaptativo para estimar o estado $x_\alpha$ é baseado na estrutura do observador de Luenberger comum e é dado por
+
+\begin{equation} \label{obsadap}
+\begin{array}{ll}
+\dot{\hat{x}}=\hat{A}(t)\hat{x}+\hat{b}_p(t)u+L(t)(y-\hat{y}),& \hat{x}(0)=\hat{x}_0 \\
+\hat{y}=C\hat{x}
+\end{array}
+\end{equation}
+onde $\hat{x}$ é a estimativa de $x_\alpha$,
+
+\begin{equation} \label{matrizA}
+\hat{A}(t)=\left[
+\begin{array}{ccc}
+						&	\vdots	&	I_{n-1} \\
+-\hat{a}_p	& \vdots	&	\cdots	\\
+						&	\vdots	&		0			\\	
+\end{array}\right]
+\end{equation}
+onde $\hat{a}_p$ e $\hat{b}_p$ são as estimativas de $a_p$ e $b_p$, respectivamente, e
+
+\begin{equation} \label{ele}
+L(t)=a^*_p-\hat{a}_p(t)
+\end{equation}
+$a^*_p\in\mathbb{R}^n$ e é escolhido a partir de
+
+\begin{equation} \label{Aest}
+A^*=\left[
+\begin{array}{ccc}
+			&	\vdots	&	I_{n-1} \\
+-a^*_p	& \vdots	&	\cdots	\\
+			&	\vdots	&		0			\\	
+\end{array}\right],
+\end{equation}
+onde $a^*_p=\begin{array}{cccc}[a^*_{n-1} & a^*_{n-2} & \cdots & a^*_0]\end{array}^T$, e $A^*$ é uma matriz estável que deve atender às condições de desempenho dadas por um polinômio característico escolhido a partir de 
+
+\begin{equation} \label{dettt}
+det[sI-(A^*-L(t)C)]
+\end{equation}
+
+
+\section{Projeto do Observador}
+
+O observador utilizado neste trabalho é projetado a partir da equação (\ref{obsadap}). As leis de adaptação usadas para gerar $\hat{a}_p(t)$ e $\hat{b}_p(t)$ são obtidas por um método de estimação de parâmetros. Neste trabalho serão utilizados os seguintes métodos, o método gradiente com uma função de custo instantânea, o método gradiente com uma função de custo integral e o método dos mínimos quadrados, todos estes definidos em \cite{IOA96}. Parametrizando (\ref{ft}) como
+
+\begin{equation} \label{zpar}
+z=\theta^{*T}\phi
+\end{equation}
+em que
+
+\begin{equation} \label{phii}
+\phi=\left[\begin{array}{cc}
+\dfrac{\alpha^T_{n-1}(s)}{\Lambda(s)}u & -\dfrac{\alpha^T_{n-1}(s)}{\Lambda(s)}y
+\end{array}\right]^T=\left[\begin{array}{cc}
+\phi^T_1 & \phi^T_2
+\end{array}\right]^T
+\end{equation}
+onde $\alpha_i(s)=\left[\begin{array}{cccc} s^i & s^{i-1} & \cdots & 1\end{array}\right]^T$,
+
+\begin{equation} \label{thetaa}
+\theta^*=\left[\begin{array}{ccccccc}
+b_{n-1}  &  b_{n-2}  &  \cdots  &  a_{n-1}  &  a_{n-2}  &  \cdots  &  a_0
+\end{array}\right]^T
+\end{equation}
+é o vetor dos parâmetros da planta, e
+
+\begin{equation} \label{lamb}
+\Lambda(s)=s^n+\lambda_{n-1}s^{n-1}+\cdots+\lambda_0
+\end{equation}
+sendo $\lambda=\left[\begin{array}{cccc}\lambda_{n-1} & \lambda_{n-2}  & \cdots & \lambda_0\end{array}\right]^T$. $\Lambda(s)$ é um polinômio \textit{Hurwitz} de grau $n$ a ser escolhido durante o projeto com a função de ser usado para a filtragem de sinais com o intuito de evitar derivações de sinal.
+
+Usando (\ref{zpar}) a estimativa de $z$ é gerada como sendo
+
+\begin{equation} \label{zest}
+\hat{z}=\theta^T\phi
+\end{equation}
+onde $\theta$ é a estimativa de $\theta^*$. O erro normalizado é definido como
+
+\begin{equation} \label{enorm}
+\varepsilon=\frac{z-\hat{z}}{m^2}
+\end{equation}
+onde $m^2=1+n^2_s$ e $n_s$ é o sinal de normalização tipicamente escolhido como $n^2_s=\phi^T\phi$. A equação (\ref{zpar}) pode ser redefinida como
+
+\begin{equation} \label{zmod}
+z=\frac{s^n}{\Lambda(s)}y=y-\lambda^T\frac{\alpha_{n-1}(s)}{\Lambda(s)}y
+\end{equation}
+
+Por fim, são definidas as leis de adaptação dos parâmetros dependendo dos métodos a serem utilizados.
+
+\begin{description}
+\item[a)] Método do Gradiente com Função de Custo Instantânea
+\end{description}
+
+\begin{equation} \label{tetap}
+\dot{\theta}=\Gamma\varepsilon\phi.
+\end{equation}
+
+\begin{description}
+\item[b)] Método do Gradiente com Função de Custo Integral
+\end{description}
+
+\begin{equation} \label{tetapint}
+\begin{array}{llll}
+\dot{\theta}	&	=	&	\Gamma(R(t)\theta+Q(t))												\\
+\dot{R}				&	=	&	-\beta{}R+\dfrac{\phi\phi^T}{m^2},	& R(0)=0	\\
+\dot{Q}				&	=	&	-\beta{}Q-\dfrac{z\phi}{m^2},				&	Q(0)=0	\\
+\end{array}
+\end{equation}
+
+\begin{description}
+\item[c)] Método dos Mínimos Quadrados com Fator de Esquecimento
+\end{description}
+
+\begin{equation} \label{tetapmq}
+\begin{array}{llll}
+\dot{\theta}	&	=	&	P\varepsilon\phi												\\
+\dot{P}				&	=	&	\beta{}P-\dfrac{P\phi\phi^TP}{m^2},	& P(0)=P_0	\\
+\end{array}
+\end{equation}
+
+Ainda segundo \cite{IOA96}, um observador adaptativo para a planta (\ref{pltobs}) formado pela combinação da equação do observador (\ref{obsadap}) e a lei de adaptação de parâmetros baseada no modelo paramétrico da planta (\ref{tetap} - \ref{tetapmq}) garante que:
+
+\begin{itemize}
+	\item	Todos os sinais são uniformemente limitados;
+	\item O erro de estimação $\tilde{y}=y-\hat{y}$ converge para zero quando $t\rightarrow\infty$;
+	\item Se $u$ é suficientemente rico em frequências, então o erro de estimação de estado $\tilde{x}=x-\hat{x}$ e o erro de estimação dos parâmetros $\tilde{\theta}=\theta-\hat{\theta}$ convergem para zero.
+\end{itemize}
+
+\newpage
+
+\section{Resumo das Equações do Observador}
+
+A Tabela \ref{tab:obs} apresenta um resumo das equações desenvolvidas para o observador neste capítulo.
+
+\begin{table}[th]
+	\caption{Resumo das equações para o projeto do observador.}
+	\large
+	\centering
+	\begin{tabular}{|l|}
+	\hline
+	\multicolumn{1}{|c|}{\textbf{Observador}} \\
+	\hline
+	$\dot{\hat{x}}=\left[
+\begin{array}{ccc}
+						&	\vdots	&	I_{n-1} \\
+-\hat{a}_p	& \vdots	&	\cdots	\\
+						&	\vdots	&		0			\\	
+\end{array}\right]\hat{x}+\hat{b}_p(t)u+(a^*_p-\hat{a}_p(t))(y-\hat{y})$\\
+						 						 $y=\left[\begin{array}{cccc}1 & 0 & \cdots & 0\end{array}\right]\hat{x}$ \\
+	\hline
+	\multicolumn{1}{|c|}{\textbf{Parametrização}}\\
+	\hline		
+	$\theta^*=\left[\begin{array}{ccccccc}
+b_{n-1}  &  b_{n-2}  &  \cdots  &  a_{n-1}  &  a_{n-2}  &  \cdots  &  a_0
+\end{array}\right]^T$	\\
+												 $\varepsilon=\dfrac{z-\hat{z}}{m^2}$\\	 
+												 $\hat{z}=\theta^T\phi$\\
+												 $\phi=\left[\begin{array}{cc}
+\dfrac{\alpha^T_{n-1}(s)}{\Lambda(s)}u & -\dfrac{\alpha^T_{n-1}(s)}{\Lambda(s)}y
+\end{array}\right]^T$\\
+												 $z=\dfrac{s^n}{\Lambda(s)}y$\\
+	\hline
+	\multicolumn{1}{|c|}{\textbf{Método do Gradiente} (Função de Custo Instantânea)}\\
+	\hline
+	$\dot{\theta}=\Gamma\varepsilon\phi$ \space $\Gamma=\Gamma^T>0$ \\
+	\hline
+	\multicolumn{1}{|c|}{\textbf{Método do Gradiente} (Função de Custo Integral)}\\
+	\hline
+	$\begin{array}{llll}
+\dot{\theta}	&	=	&	\Gamma(R(t)\theta+Q(t))												\\
+\dot{R}				&	=	&	-\beta{}R+\dfrac{\phi\phi^T}{m^2},	& R(0)=0	\\
+\dot{Q}				&	=	&	-\beta{}Q-\dfrac{z\phi}{m^2},				&	Q(0)=0	\\
+\end{array}$ \\
+	\hline
+	\multicolumn{1}{|c|}{\textbf{Método dos Mínimos Quadrados}}\\
+	\hline
+	$\begin{array}{llll}
+\dot{\theta}	&	=	&	P\varepsilon\phi												\\
+\dot{P}				&	=	&	\beta{}P-\dfrac{P\phi\phi^TP}{m^2},	& P(0)=P_0	\\
+\end{array}$ \\
+	\hline
+	\end{tabular}
+	\label{tab:obs}
+\end{table}											
+	
+	

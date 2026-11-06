@@ -1,0 +1,193 @@
+%
+%% Capítulo 1: Introdução
+%%
+\mychapter{Introdução}
+\label{Cap:introducao}
+\hyphenation {cons-tru-ção e-la-bo-ra-ção ne-ces-sá-rios te-má-ti-ca mu-ni-ci-pais o-pe-ran-do i-ne-fi-ca-zes}
+
+\section{Controle Adaptativo}
+
+Nos dias atuais é grande a ascensão dos sistemas automatizados que com o passar dos anos têm se tornado cada vez mais eficientes, e a teoria de sistemas de controle tem acompanhado forte e intensamente essa realidade. De forma simples, a teoria diz que um sistema a ser controlado (automatizado) é chamado de planta, e o objetivo é fazer com que este apresente um comportamento pré-especificado - pela análise de um sinal de saída - a partir da aplicação de sinais adequados na entrada \cite{BAZ05}. 
+
+Para determinar precisamente estes sinais aplicados na entrada é recorrente um bom conhecimento da planta para assim controlar o comportamento da saída. Na prática, aproxima-se o comportamento de uma planta real através de um modelo. Quando o modelo da planta é muito discrepante da real, ou ainda, quando esta varia com o tempo, as técnicas de controle convencionais não podem garantir bons resultados.
+
+Com a finalidade de resolver estes tipos de situações existem as técnicas de controle adaptativo, que têm um objetivo claro e definido: controlar plantas com parâmetros desconhecidos ou conhecidos com incertezas. Mesmo não tendo um bom conhecimento da planta o controlador adapta-se para fazer com que a saída se comporte como desejado, mesmo se os parâmetros da planta variam com o tempo. Tomando como exemplo o controle de aeronaves, as condições de operação variam de acordo com a altitude e o controlador deve se adaptar cada vez que estas condições mudam para poder garantir que o sistema se comportará como desejado.
+
+Ao longo de quase 60 anos, muitas técnicas de controle adaptativo foram desenvolvidas como os controladores tradicionais, o MRAC (\textit{Model Reference Adaptive Controller}) em \cite{NARV78} e \cite{NARL80}, e o APPC(\textit{Adaptive Pole Placement Controller}) em \cite{IOA96} e \cite{SAS89}; assim como os controladores mais modernos como, por exemplo, o controlador adaptativo \textit{backstepping} \cite{KRS94}.
+
+\nomenclature{MRAC:}{Model Reference Adaptive Controller (Controlador Adaptativo por Modelo de Referência)}
+\nomenclature{APPC:}{Adaptive Pole Placement Controller (Controlador Adaptativo por Posicionamento de Pólos)}
+
+Apesar de solucionarem o problema de parâmetros desconhecidos, uma desvantagem dos controladores adaptativos que utilizam leis integrais de adaptação é o fato deles terem muitas constantes para serem ajustadas, tornando a fase de projeto laboriosa, mesmo para profissionais com mais experiência. Em virtude disto, existem muitos trabalhos que propõem controladores onde as leis integrais de adaptação são substituídas por leis chaveadas, permitindo obter-se um rápido transitório e a robustez às incertezas nos parâmetros e distúrbios externos. Estratégias como o VS-APPC (\textit{Variable Structure Adaptive Pole Placement Controller}) desenvolvido em \cite{SIL04}, o VS-MRAC (\textit{Variable Structure Model Reference Adaptive Controller}) em \cite{HSUC89}, que também foi proposto em sua versão indireta, o IVS-MRAC (\textit{Indirect Variable Structure Model Reference Adaptive Controller}), apresentada em \cite{OLI04} são exemplos de controle adaptativo robusto. Em \cite{CUNH06} foi apresentado um controlador que unia as vantagens do VS-MRAC (desempenho transitório) com as do MRAC (sinal de controle suave), denominado DMARC (\textit{Dual Mode Adaptive Robust Controller}). Sua versão indireta, denominada de IDMARC (\textit{Indirect Dual Mode Adaptive Robust Controller}), foi desenvolvida em \cite{LEO11}. E ainda o VS-ABC (\textit{Variable Structure Adaptive Backstepping Controller}) em \cite{QUEIR08}, onde este último apresenta várias vantagens em relação ao VS-MRAC tradicional, uma delas é apresentar uma abordagem indireta, o que proporciona um processo de ``estimação'' individual dos parâmetros, o qual se torna útil quando somente parte dos parâmetros da planta são desconhecidos. Entretanto, o VS-MRAC apresenta uma lei de controle mais simples.
+
+\nomenclature{VS-MRAC:}{Variable Structure Model Reference Adaptive Controller (Controlador Adaptativo por Modelo de Referência e Estrutura Variável)}
+\nomenclature{VS-APPC:}{Variable Structure Adaptive Pole Placement Controller (Controlador Adaptativo por Posicionamento de Pólos e Estrutura Variável)}
+\nomenclature{DMARC:}{Dual Mode Adaptive Robust Controller (Controlador em Modo Dual Adaptativo Robusto)}
+\nomenclature{VS-ABC:}{Variable Structure Adaptive Backstepping Controller (Controlador Adaptativo Backstepping a Estrutura Variável}
+\nomenclature{IVS-MRAC:}{Indirect Variable Structure Model Reference Adaptive Controller (Controlador Adaptativo Indireto por Modelo de Referência e Estrutura Variável)}
+\nomenclature{IDMARC:}{Indirect Dual Mode Adaptive Robust Controller (Controlador em Modo Dual Adaptativo Robusto Indireto)}
+
+Alguns trabalhos anteriores descrevem estratégias de controle \textit{backstepping} e estrutura variável  ~\cite{RIB99, LIN02, ZHA08, ZHOU08}. Em ~\cite{STO97}, são utilizados filtros com modos deslizantes para estimação das derivadas da saída da planta, simplificando o método de controle \textit{backstepping}. Em ~\cite{BAR96}, propôs-se a estabilização de uma classe de sistemas não lineares com incertezas com uma técnica de controle \textit{backstepping}, aliada a um controle por modos deslizantes de segunda ordem. O algoritmo de controle é composto por $n-1$ passos, sendo $n$ a ordem do sistema. De modo semelhante ao apresentado em ~\cite{ZIN96}, somente no último passo, um controle por modos deslizantes é desenvolvido com o intuito de compensar as incertezas presentes no sistema. Esta técnica de controle adaptativo \textit{backstepping} pode ser utilizada em duas formas: por realimentação de estado (\textit{state-feedback}), na qual as variáveis de estado estão disponíveis para medição; ou por realimentação de saída (\textit{output-feedback}), em que somente a saída da planta é mensurável. Na realidade, a grande maioria dos sistemas físicos apresentam dificuldade em medir as variáveis de estado. No entanto, o \textit{princípio da separação} ~\cite{KOK95} permite que problemas de realimentação de saída sejam resolvidos com a combinação de controladores por realimentação de estado com observadores. Esta afirmação, porém, só é válida no caso de sistemas lineares e não se sustenta para sistemas não lineares. Como a proposta inicial do controle \textit{backstepping} foi para sistemas não lineares, quando não há a possibilidade de mensurar todas as variáveis de estado são utilizados filtros, que geram variáveis auxiliares para suprir a necessidade da medição das variáveis de estado. Entre eles, estão os filtros K, desenvolvidos em ~\cite{KREI77}, e adaptados para sistemas não lineares em ~\cite{KAN91}, ~\cite{KAN93} e ~\cite{KRS93}.
+
+Já foi proposta a união das técnicas de controle \textit{backstepping} com observadores de estado, mas sem a utilização de estrutura variável por ~\cite{ARC10}. Já se apresentou também controladores \textit{backstepping} a estrutura variável aplicados a sistemas lineares, como proposto em ~\cite{QUE08, QUERA08, QUEA08, QUEIR08}, onde foram demonstradas propriedades de robustez a distúrbios externos e variações paramétricas. Posteriormente em ~\cite{QUEIRA08}, foi apresentada a análise de estabilidade do VS-ABC para plantas lineares com grau relativo unitário, e ainda, foram propostos diferentes algoritmos chamados de VS-ABC à relé, VS-ABC compacto, M/VS-ABC (\textit{Modular} VS-ABC) e T/VS-ABC (\textit{Tuning Functions} VS-ABC). 
+
+\section{Motivação e Objetivo}
+
+Em todos os casos que envolvem controle \textit{backstepping} a estrutura variável mostrados na seção anterior são utilizados os filtros K, que fazem a filtragem da saída da planta para obter suas derivadas, gerando variáveis auxiliares que não têm uma relação direta com as variáveis de estado, o que torna o projeto mais complexo.
+
+\nomenclature{M/VS-ABC:}{Modular VS-ABC (VS-ABC Modular)}
+\nomenclature{T/VS-ABC:}{Tuning Functions VS-ABC (VS-ABC por Funções de Sintonia)}
+
+Neste trabalho é proposto um controlador adaptativo \textit{backstepping} a estrutura variável (VS-ABC) para uma planta de grau relativo unitário, estimando as variáveis de estado a partir de um observador, como representado na Figura \ref{fig:backobs}. O objetivo é deixar o projeto mais intuitivo, mesmo para projetistas menos experientes, com a justificativa de que a teoria clássica de observadores de estado é bem mais conhecida. Esta combinação de estratégias permite diminuir a dependência do controlador nos parâmetros da planta, pois nem todos necessitam ser ``estimados''. Obviamente esse ganho é compensado com o dispêndio de ter que se projetar o observador em separado, e por se tratar de um controlador adaptativo, faz-se necessário utilizar um bloco de estimação de parâmetros somente para o observador.
+
+\begin{figure}[!htb] \begin{center}
+% fbox faz uma borda ao redor do seu argumento
+\includegraphics[scale=0.24]{introducao/blocoback}
+\caption{Diagrama de blocos do controle \textit{backstepping} com um observador}
+\label{fig:backobs}
+\end{center} \end{figure}
+
+\section{Controle Adaptativo \textit{Backstepping}}
+
+A ideia do controle \textit{backstepping} é projetar um controlador recursivamente considerando algumas das variáveis de estado como ``controles virtuais'' e projetar para eles leis de controle intermediárias com o objetivo de melhorar o desempenho dos sistemas adaptativos. A técnica de controle \textit{backstepping} foi desenvolvida em ~\cite{KANE91} e aperfeiçoado em ~\cite{KOK95}. Seja o sistema abaixo
+
+\begin{equation} \label{sistback}
+\begin{array}{lll}
+\dot{x}_1	&	=	&	bx_2 - ax_1 \\
+\dot{x}_2	&	=	&	x_3					\\
+\dot{x}_3	&	=	&	u						\\
+\end{array}
+\end{equation}
+onde $a$ e $b$ são os parâmetros do sistema linear e invariante no tempo. O primeiro controle virtual é $x_2$; ele é usado para estabilizar a primeira equação como um sistema separado. Como os parâmetros são desconhecidos é projetado um controlador com uma lei de controle para $x_2$ e uma lei de adaptação dos parâmetros baseada na teoria de Lyapunov. Para o próximo passo o estado $x_3$ é o controle virtual que será usado para estabilizar as duas primeiras equações, e da mesma maneira é definida uma lei de controle e outra de adaptação dos parâmetros. Contudo, uma lei de adaptação já foi definida no primeiro passo e isso gera um problema de sobre-parametrização (existência de várias leis de adaptação para um mesmo parâmetro). Tal problema foi solucionado em ~\cite{KRS92} através das ``funções de sintonia''. E, somente no terceiro passo, é que a lei de controle $u$ responsável por controlar todo o sistema, será definida assim como a lei final de adaptação dos parâmetros.
+
+A abordagem por funções de sintonia é uma forma avançada do controle adaptativo \textit{backstepping}, e tem a vantagem da dinâmica do controlador ser mínima. Mesmo com certas vantagens, algumas desvantagens podem ser observadas, uma delas é a falta de liberdade na escolha da lei de adaptação dos parâmetros, o que se torna muito oneroso quando se trata do controle de sistemas de ordem elevada, pois o projeto das funções de sintonia gera muita complexidade ao projeto do controlador. Essa e outras desvantagens foram removidas pela abordagem ``modular'' do controle \textit{backstepping}, apresentada inicialmente em ~\cite{KRS95}.
+
+Baseado no ``princípio de equivalência à certeza'', essa nova abordagem resolve os problemas da abordagem anterior separando o módulo de estimação do módulo de controle, podendo-se utilizar leis de adaptação de parâmetros como gradiente ou mínimos quadrados. Com base na abordagem modular foram desenvolvidos dois controladores adaptativos \textit{backstepping}: o ISS (\textit{Input-to-State Stability}), somente para sistemas não lineares; e o SG (\textit{Small Gain}), o qual pode ser aplicado tanto no caso linear quanto no não linear. Ainda com base nesta abordagem, também foi proposto em ~\cite{QUEIRA08}, o M/VS-ABC para plantas lineares com grau relativo arbitrário com o objetivo de melhorar o desempenho transitório do controlador SG, onde as leis adaptativas integrais foram substituidas por leis chaveadas.
+
+\nomenclature{ISS:}{Input-to-State Stability (Estabilidade Entrada-para-Estado)}
+\nomenclature{SG:}{Small Gain (Pequeno Ganho)}
+
+\section{Sistemas com Estrutura Variável}
+
+A teoria de sistemas com estrutura variável tem sido bastante utilizada no tratamento de problemas de sistemas de controle, principalmente na forma conhecida como controle por modos deslizantes ~\cite{UTK77}, ~\cite{UTK78}, ~\cite{UTK83}, ~\cite{UTK87}, ~\cite{UTK92}, ~\cite{UTK93} e ~\cite{ARA93} . Neste método, as funções de chaveamento das variáveis de controle devem ser projetadas de modo a restringir a dinâmica do sistema a uma superfície de chaveamento chamada de superfície deslizante.
+
+Os sistemas com estrutura variável têm como principais características a rapidez do transitório e robustez a variações paramétricas e perturbações. Em contrapartida, possuem alguns aspectos negativos a se considerar, como o alto valor do sinal de controle inicial e seu chaveamento em alta frequência, fenômeno chamado \textit{chattering}.
+
+O projeto do controle por modos deslizantes geralmente envolve dois passos principais: primeiro é feita a seleção de uma superfície deslizante que induza a uma dinâmica de ordem reduzida estável designada pelo projetista, e, posteriormente, a síntese de uma lei de controle para forçar as trajetórias do sistema em malha fechada convergirem e permanecerem na superfície deslizante.
+
+Desta forma, pretende-se apresentar o desenvolvimento matemático do Controlador a Estrutura Variável, para um sistema de segunda ordem, fundamental para o desenvolvimento de um controlador adaptativo com leis chaveadas. Considere o sistema
+
+\begin{equation}\label{sistvs}
+\begin{array}{lll}
+\dot{x}_1	&	=	&	x_2							\\
+\dot{x}_2	&	=	&	a_1x_1+a_2x_2+u	\\
+\end{array}
+\end{equation}
+onde $a_1$ e $a_2$ são os parâmetros desconhecidos ou conhecidos com incertezas. Define-se, então, uma superfície de chaveamento
+
+\begin{equation}\label{schav}
+s=\left\{x\in\mathbb{R}|s(x)=cx_1+x_2=0,c>0\right\}
+\end{equation}
+na qual deseja-se que as variáveis de estado $x_1$ e $x_2$ permaneçam (dinâmica do sistema), ou seja, é a superfície sobre a qual o sistema deve ``deslizar''. Deve ser satisfeita a condição $s\dot{s}<0$ para que se obtenha o comportamento ilustrado na Figura \ref{fig:esqvs}.
+
+\begin{figure}[htb] \begin{center}
+% fbox faz uma borda ao redor do seu argumento
+\includegraphics[scale=0.3]{introducao/vs}
+\caption{Superfície de deslizamento para o sistema da equação (\ref{schav})}
+\label{fig:esqvs}
+\end{center} \end{figure}
+O sinal de controle é definido como
+
+\begin{equation}\label{uchav}
+u(x)=\left\{
+\begin{array}{l}
+u^+(x),se \ s(x)>0	\\
+u^-(x),se \ s(x)<0	\\
+\end{array}
+\right.,
+\end{equation}
+e, define-se também
+
+\begin{equation}\label{efe}
+f(x)=\left[
+\begin{array}{l}
+x_2							\\
+a_1x_1+a_2x_2+u	\\
+\end{array}
+\right]=
+\left[
+\begin{array}{l}
+f_1	\\
+f_2	\\
+\end{array}
+\right].
+\end{equation}
+Assim, o sistema passa a ser
+
+\begin{equation}\label{nsistvs}
+\dot{x}=\left\{
+\begin{array}{l}
+f^+(x),se \ s(x)>0	\\
+f^-(x),se \ s(x)<0	\\
+\end{array}
+\right..
+\end{equation}
+
+Se a condição $s\dot{s}<0$ é satisfeita em uma vizinhança de $s(x)=0$, os campos vetoriais $f^+(x)$ e $f^-(x)$ apontam para $s$ nesta vizinhança. Portanto, se uma trajetória alcança $s$ ela é forçada a deslizar (escorregar ou apresentar um modo deslizante) sobre esta superfície. 
+
+Considere
+
+\begin{equation}\label{uchav2}
+u(x)=\theta_1x_1+\theta_2x_2
+\end{equation}
+onde
+
+\begin{equation}\label{tetachav}
+\left\{
+\begin{array}{ll}
+\theta_1=-\bar{\theta}_1sgn(sx_1),	&	\bar{\theta}_1>|a_1|		\\
+\theta_2=-\bar{\theta}_2sgn(sx_2),	&	\bar{\theta}_2>|c+a_2|	\\
+\end{array}
+\right..
+\end{equation}
+
+Os valores de $\bar{\theta}$ determinam a rapidez com que a trajetória atinge a superfície de deslizamento. Pela condição de deslizamento observa-se
+
+\begin{equation}\label{condesl}
+s\dot{s}=s(c\dot{x}_1+\dot{x}_2)=s(cx_2+a_1x_1+a_2x_2+u)
+\end{equation}
+e, substituindo (\ref{uchav2}) em (\ref{condesl}), chega-se a
+
+\begin{equation}\label{condesl2}
+s\dot{s}=s[a_1x_1+(a_2+c)x_2+\theta_1x_1+\theta_2x_2].
+\end{equation}
+
+Usando (\ref{tetachav}) em (\ref{condesl2}), obtém-se
+
+\begin{equation}\label{condesl3}
+s\dot{s}=a_1sx_1-\bar{\theta}_1|sx_1|+(a_2+c)sx_2-\bar{\theta}_2|sx_2|
+\end{equation}
+e, sendo $\bar{\theta}_1>|a_1|$ e $\bar{\theta}_2>|c+a_2|$, a condição $s\dot{s}<0$ é satisfeita. Consequentemente, $s$ se torna uma superfície deslizante.
+
+\section{Observadores de Estado}
+
+Como explicado anteriormente, na maioria das aplicações práticas em sistemas de controle não há a possibilidade de medição de todas as variáveis de estado do sistema, muitas vezes necessárias para a aplicação em diversas estratégias de controle. Quando estas variáveis não estão disponíveis é possível estimá-las com o uso de observadores de estado, que são uma espécie de réplica da planta, e fornecem os valores das variáveis de estado através de cálculos realizados com os sinais de entrada e de saída da planta. 
+
+Um sistema é dito observável se for possível obter o estado inicial (desconhecido) a partir das medidas da entrada e saída da planta durante um intervalo de tempo finito ~\cite{NISE02}. Só é possível estimar as variáveis de estado a partir de um observador se o sistema em questão for observável.
+
+Mesmo que todas estas condições sejam atendidas, para que as variáveis de estado sejam estimadas é ainda  de suma importância dar ênfase a um bom conhecimento dos parâmetros do sistema. E, para aplicar um observador no controlador proposto neste trabalho, é necessário que ele estime as variáveis de estado de forma adaptativa. Por isso será utilizado o Observador Adaptativo de Luenberguer, descrito no Capítulo \ref{cap:obs}, que utiliza a estrutura do observador de Luenberguer clássico integrado a uma lei de adaptação de parâmetros.
+
+
+\section{Estrutura da Dissertação}
+
+Este trabalho está organizado da seguinte forma:
+
+\begin{itemize}
+	\item O Capítulo \ref{Cap:introducao} introduz os pontos a serem desenvolvidos no decorrer da pesquisa, mostrando conhecimentos prévios relevantes para a compreensão do estudo proposto;
+	\item O Capítulo \ref{cap:obs} descreve o desenvolvimento do Observador Adaptativo de Luenberger e apresenta um resumo de todas as equações envolvidas no projeto do observador para poder inclui-lo no projeto do VS-ABC;
+	\item O Capítulo \ref{Cap:VSABCO} apresenta o desenvolvimento do objetivo principal do trabalho, o projeto do VS-ABC para plantas com grau relativo unitário, utilizando um observador para estimar as variáveis de estado, ao invés dos filtros K. E ainda resultados de simulações para uma planta de segunda ordem instável, além de testes de robustez a perturbações;
+	\item O Capítulo \ref{Cap:VSABCON} mostra o projeto do VS-ABC para plantas com grau relativo $n$ sem zeros, com o objetivo de apresentar os passos do projeto de um controlador \textit{backstepping} e do bom desempenho no uso do observador.  Também são apresentados resultados de simulações para um sistema de segunda ordem sem zeros e muito oscilatório;
+	\item O Capítulo \ref{Cap:conclusao} retoma os objetivos e alguns pontos relevantes que foram observados durante o desenvolvimento do texto, além das perspectivas para trabalhos futuros.
+\end{itemize}
+
+

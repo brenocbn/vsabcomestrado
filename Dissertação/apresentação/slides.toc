@@ -1,0 +1,6 @@
+\beamer@endinputifotherversion {3.08pt}
+\select@language {brazil}
+\beamer@sectionintoc {1}{Desenvolvimento do trabalho}{2}{0}{1}
+\beamer@sectionintoc {2}{Descri\c c\~ao do problema}{4}{0}{2}
+\beamer@sectionintoc {3}{proposta do doutorado}{10}{0}{3}
+\beamer@sectionintoc {4}{Estado da Arte}{12}{0}{4}

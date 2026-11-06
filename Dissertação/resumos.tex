@@ -1,0 +1,27 @@
+%
+% ********** Resumo
+%
+
+% Usa-se \chapter*, e não \chapter, porque este "capítulo" não deve
+% ser numerado.
+% Na maioria das vezes, ao invés dos comandos LaTeX \chapter e \chapter*,
+% deve-se usar as nossas versões definidas no arquivo comandos.tex,
+% \mychapter e \mychapterast. Isto porque os comandos LaTeX têm um erro
+% que faz com que eles sempre coloquem o número da página no rodapé na
+% primeira página do capítulo, mesmo que o estilo que estejamos usando
+% para numeração seja outro.
+\mychapterast{Resumo}
+Esta pesquisa objetiva desenvolver um controlador adaptativo \textit{backstepping} a estrutura variável (\textit{Variable Structure Adaptive Backstepping Controller}, VS-ABC) utilizando observadores de estado para plantas monovariáveis, lineares e invariantes no tempo com grau relativo unitário. Para isso, os filtros K foram substituídos por um Observador Adaptativo de Luenberger e o algoritmo de controle utiliza leis chaveadas. As simulações apresentadas comparam o desempenho do controlador quando as variáveis de estado são estimadas por um observador, com o caso em que as variáveis estão disponíveis para medição. Os controladores adaptativos \textit{backstepping} mesmo com várias vantagens de desempenho, ainda possuem algoritmos muito complexos, principalmente quando não são medidas as variáveis de estado do sistema, pois o uso de filtros nos sinais de entrada e saída da planta não é algo trivial. Na intenção de tornar o projeto do controlador mais intuitivo, pode-se utilizar um observador adaptativo em alternativa aos comumente utilizados filtros K. Além disso, o controlador tem uma menor dependência dos parâmetros desconhecidos da planta na fase de projeto, já que as variáveis de estado são consideradas conhecidas. E ainda, leis chaveadas podem ser utilizadas no controlador em vez das leis integrais tradicionais porque melhoram o desempenho transitório do sistema e aumentam a robustez perante distúrbios externos na entrada da planta.
+ 
+\vspace{1.5ex}
+{\bf Palavras-chave}: Controle Adaptativo \textit{Backstepping}, Observadores de Estado, Sistemas com Estrutura Variável.
+%
+% ********** Abstract
+%
+\mychapterast{Abstract}
+
+This research aims at developing a variable structure adaptive backstepping controller (VS-ABC) by using state observers for SISO (Single Input Single Output), linear and time invariant systems with relative degree one. Therefore, the filters were replaced by a Luenberger Adaptive Observer and the control algorithm uses switching laws. The presented simulations compare the controller performance, considering when the state variables are estimated by an observer, with the case that the variables are available for measurement. Even with numerous performance advantages, adaptive backstepping controllers still have very complex algorithms, especially when the system state variables are not measured, since the use of filters on the plant input and output is not something trivial. As an attempt to make the controller design more intuitive, an adaptive observer as an alternative to commonly used K filters can be used. Furthermore, since the states variables are considered known, the controller has a reduction on the dependence of the unknown plant parameters on the design. Also, switching laws could be used in the controller instead of the traditional integral adaptive laws because they improve the system transient performance and increase the robustness against external disturbances in the plant input.
+
+\vspace{1.5ex}
+
+{\bf Keywords}: Adaptive Backstepping Control, State Observers, Variable Structure Systems.

@@ -1,0 +1,463 @@
+%%
+%% Capítulo 3: VS-ABC com Observadores de Estado - Grau Relativo 1
+%%
+
+\mychapter{VS-ABC com Observadores de Estado - Grau Relativo 1}
+\label{Cap:VSABCO}
+\section{Introdução}
+
+O sistema SISO (\textit{Single Input Single Output}), LTI (\textit{Linear Time Invariant}) e com grau relativo unitário, ou seja, $\rho=1$, a ser considerado é descrito por
+
+\nomenclature{LTI:}{Linear Time Invariant (Linear e Invariante no Tempo)}
+\nomenclature{SISO:}{Single Input Single Output (Monovariável)}
+
+\begin{equation} \label{sist}
+\frac{y\left(s\right)}{u\left(s\right)}=\frac{b_{n-1}s^{n-1}+\cdots{}+b_1s+b_0}{s^n+a_{n-1}s^{n-1}+\cdots{}+a_0}
+\end{equation}
+onde os parâmetros $b_{n-1} \cdots b_0$ e $a_{n-1} \cdots a_0$ são constantes, mas desconhecidos ou conhecidos com incertezas. O erro de saída é definido como
+
+\begin{equation} \label{errz}
+z=y-y_r.
+\end{equation}
+O objetivo é fazer com que $y$, que é a saída do sistema, siga a saída do modelo de referência, $y_r$, levando o erro $z\rightarrow0$, mantendo todos os sinais em malha fechada uniformemente limitados. As seguintes hipóteses devem ser consideradas:
+
+\begin{itemize}
+\item H1: O sinal do ganho da planta $(sgn(b_{n-1}))$ é conhecido;
+\item H2: A planta é de fase mínima, ou seja, o polinômio $b_{n-1}s^{n-1}+\cdots{}+b_1s+b_0$ é \textit{Hurwitz};
+\item H3: $y_r$ é a saída do modelo de referência e $r(t)$, a entrada do modelo, é uniformemente limitada e contínua por partes;
+\item H4: O grau relativo do modelo de referência é o mesmo grau relativo da planta.
+\end{itemize}
+
+\section{Controlador Adaptativo \textit{Backstepping}}
+
+Inicialmente a planta (\ref{sist}) será representada na forma canônica observável
+\begin{equation} \label{fcobs}
+\begin{array}{
+ccc}
+{\dot{x}}_{1}=x_{2}-a_{n-1}y+b_{n-1}u \\
+\vdots{} \\
+\begin{array}{
+cc}
+{\dot{x}}_{n-1}=x_n-a_1y+b_1u \\
+{\dot{x}}_n=-a_0y+b_0u \\
+y=x_1
+\end{array}
+\end{array}
+\end{equation}
+
+Como o controlador será projetado para plantas com grau relativo unitário ($\rho=1$) a lei de controle será definida logo no primeiro passo do projeto. O único sinal disponível para medição é a saída da planta ($y(t)$). No entanto, os valores das variáveis de estado serão considerados conhecidos para o controlador, já que estes serão obtidos pelo observador. Baseado em (\ref{fcobs}) e com $\rho=1$ tem-se
+
+\begin{equation} \label{grum}
+{\dot{x}}_1=x_2-a_{n-1}y+b_{n-1}u.
+\end{equation}
+Derivando o erro de saída (\ref{errz}), obtém-se
+
+\begin{equation} \label{zponto}
+\dot{z}=\dot{y}-{\dot{y}}_r
+\end{equation}
+e, substituindo (\ref{grum}) em (\ref{zponto}), fica-se com
+
+\begin{equation} \label{zpII}
+\dot{z}=x_2-a_{n-1}y+b_{n-1}u-{\dot{y}}_r
+\end{equation}
+Definindo o sinal de controle como
+
+\begin{equation}
+\label{scont}
+u=\hat{\varrho}\bar{u}
+\end{equation}
+onde $\hat{\varrho}$ é a estimativa de $1/b_{n-1}$ e, em seguida, definindo também
+
+\begin{equation} \label{erpar}
+\begin{array}{
+cc}
+\tilde{a}_{n-1}=a_{n-1}-\hat{a}_{n-1} \\
+\tilde{\varrho}=\varrho-\hat{\varrho}
+\end{array}
+\end{equation}
+e substituindo (\ref{scont}) e (\ref{erpar}) em (\ref{zpII}) obtém-se
+
+\begin{equation}
+\label{zpIII}
+\dot{z}=x_2-a_{n-1}y-b_{n-1}\tilde{\varrho{}}\bar{u}+\bar{u}-{\dot{y}}_r.
+\end{equation}
+Considerando agora a seguinte candidata a função de Lyapunov
+
+\begin{equation} \label{lyap}
+V=\frac{1}{2}z^2+\frac{1}{2{\gamma{}}_1}{\tilde{a}}_{n-1}^2+\frac{\left\vert{}b_{n-1}\right\vert{}}{2{\gamma{}}_2}{\tilde{\varrho{}}}^2
+\end{equation}
+com $\gamma_1>0$ e $\gamma_2>0$, sua derivada é
+
+\begin{equation} \label{vponto}
+\dot{V}=z\dot{z}-\frac{1}{{\gamma{}}_1}{\tilde{a}}_{n-1}{\dot{\hat{a}}}_{n-1}-\frac{\left\vert{}b_{n-1}\right\vert{}}{{\gamma{}}_2}\tilde{\varrho{}}\dot{\hat{\varrho{}}}
+\end{equation}
+
+Substituindo-se (\ref{zpIII}) em (\ref{vponto}) chega-se a
+
+\begin{equation} \label{vpii}
+\dot{V}=z\left(x_2-a_{n-1}y-b_{n-1}\tilde{\varrho{}}\bar{u}+\bar{u}-{\dot{y}}_r\right)-\frac{1}{{\gamma{}}_1}{\tilde{a}}_{n-1}{\dot{\hat{a}}}_{n-1}-\frac{\left\vert{}b_{n-1}\right\vert{}}{{\gamma{}}_2}\tilde{\varrho{}}\dot{\hat{\varrho{}}}
+\end{equation}
+
+Selecionando agora a lei de controle auxiliar
+
+\begin{equation} \label{ubar}
+\bar{u}=-c_1z-x_2+\hat{a}_{n-1}y+\dot{y}_r
+\end{equation}
+tem-se
+
+\begin{equation} \label{vpiii}
+\dot{V}=z\left(-a_{n-1}y-b_{n-1}\tilde{\varrho{}}\bar{u}-c_1z+{\hat{a}}_{n-1}y\right)-\frac{1}{{\gamma{}}_1}{\tilde{a}}_{n-1}{\dot{\hat{a}}}_{n-1}-\frac{\left\vert{}b_{n-1}\right\vert{}}{{\gamma{}}_2}\tilde{\varrho{}}\dot{\hat{\varrho{}}}
+\end{equation}
+e, isolando as variáveis semelhantes, fica-se com
+
+\begin{equation} \label{vppp}
+\dot{V}=-c_1z^2-\frac{1}{{\gamma{}}_1}{\tilde{a}}_{n-1}\left({\dot{\hat{a}}}_{n-1}+{\gamma{}}_1zy\right)-\frac{\left\vert{}b_{n-1}\right\vert{}}{{\gamma{}}_2}\tilde{\varrho{}}\left(\dot{\hat{\varrho{}}}+{\gamma{}}_2\frac{b_{n-1}}{\left\vert{}b_{n-1}\right\vert{}}z\bar{u}\right).
+\end{equation}
+
+Para eliminar os termos $\tilde{a}_{n-1}$ e $\tilde{\varrho}$ em (\ref{vppp}), as leis de adaptação podem ser escolhidas como
+
+\begin{equation} \label{amp}
+\dot{\hat{a}}_{n-1}=-{\gamma{}}_1zy
+\end{equation}
+
+\begin{equation} \label{varp}
+\dot{\hat{\varrho{}}}=-{\gamma{}}_2sgn\left(b_{n-1}\right)z\bar{u}
+\end{equation}
+onde $\gamma_1$ e $\gamma_2$ são os ganhos adaptativos. Assim,
+
+\begin{equation} \label{vpV}
+\dot{V}=-c_1z^2\leq0
+\end{equation}
+
+A Teoria de Estabilidade de Lyapunov \cite{IOA96} diz que se uma função de energia $V(x)$ é definida positiva e continuamente diferenciável e sua derivada $\dot{V}(x)$ é semi-definida negativa, o ponto $x=0$ é um ponto de equilíbrio estável. Baseando-se nesta afirmativa, o resultado acima garante que $[\begin{array}{ccc}z & \tilde{a}_{n-1}	&	\tilde{\varrho}\end{array}]^T=[\begin{array}{ccc}0 & 0	&	0\end{array}]^T$ é um ponto de equilíbrio estável. Pelo teorema de LaSalle-Yoshizawa \cite{KOK95} pode se dizer que $z(t)\rightarrow0$ quando $t\rightarrow\infty$.
+
+
+\section{Controlador Adaptativo \textit{Backstepping} a Estrutura Variável}
+
+Tomando como base os passos descritos na seção anterior, leis chaveadas serão propostas para substituir as leis adaptativas integrais (\ref{amp}) e (\ref{varp}). Considerando agora uma nova candidata a função de Lyapunov
+
+\begin{equation} \label{vsve}
+V=\frac{1}{2}z^2
+\end{equation}
+sua derivada é
+
+\begin{equation} \label{vsvp}
+\dot{V}=z\dot{z}
+\end{equation}
+e, substituindo (\ref{zpIII}) e (\ref{ubar}) em (\ref{vsvp}), obtém-se
+
+\begin{equation} \label{vsvpii}
+\begin{array}{lll}
+\dot{V}	&	=	&	-c_1z^2-b_{n-1}z\tilde{\varrho}\bar{u}+zy\hat{a}_{n-1}-zya_{n-1} \\
+				&	=	&	-c_1z^2+(b_{n-1}z\hat{\varrho}\bar{u}-b_{n-1}z\varrho\bar{u})+(zy\hat{a}_{n-1}-zya_{n-1})\\
+\end{array}
+\end{equation}
+
+Utilizando as seguintes leis chaveadas
+
+\begin{equation} \label{vsam}
+{\hat{a}}_{n-1}=-{\bar{a}}_{n-1}sgn\left(zy\right);\
+{\bar{a}}_{n-1}>\left\vert{}a_{n-1}\right\vert{}
+\end{equation}
+
+\begin{equation} \label{vsvr}
+\hat{\varrho{}}=-\bar{\varrho{}}sgn\left(b_{n-1}\right)sgn\left(z\bar{u}\right);\bar{\varrho{}}>\left\vert{}\varrho{}\right\vert{}
+\end{equation}
+em (\ref{vsvpii}), obtém-se
+
+\begin{equation} \label{vcvpiii}
+\dot{V}=-c_1z^2+(-\bar{\varrho}\left|b_{n-1}\right|\left|z\bar{u}\right|-\varrho{}b_{n-1}z\bar{u})+(-\bar{a}_{n-1}\left|zy\right|-a_{n-1}zy)
+\end{equation}
+
+Se as condições $\bar{\varrho}>\left|\varrho\right|$ e $\bar{a}_{n-1}>\left|a_{n-1}\right|$ forem satisfeitas, então
+\begin{equation} \label{vpfim}
+\dot{V}\leq-c_1z^2<0
+\end{equation}
+garantindo que $z=0$ é um ponto de equilíbrio globalmente assintoticamente estável, pois, de acordo com a Teoria de Estabilidade de Lyapunov \cite{IOA96}, se uma função de energia $V(x)$ é definida positiva e continuamente diferenciável e sua derivada $\dot{V}(x)$ é definida negativa, o ponto $x=0$ é um ponto de equilíbrio assintoticamente estável.
+
+O uso das leis chaveadas (\ref{vsam}) e (\ref{vsvr}) simplifica o projeto do algorítmo de controle e reduz a quantidade de cálculos necessários para a obtenção das ``estimativas'' dos parâmetros. Levar em consideração que as variáveis de estado são conhecidas, pois são obtidas pelo observador, permitiu reduzir a dependência dos parâmetros na lei de controle e, nesse caso, apenas dois parâmetros foram necessários para o projeto.
+
+Como visto nas equações (\ref{vsam}), (\ref{vsvr}) e (\ref{ubar}), durante a obtenção de $\hat{\varrho}$ através de leis chaveadas e do sinal de controle auxiliar, observa-se a presença de termo que pode resultar em um cálculo da função sinal de sinal, e isso pode causar problemas quando a frequência de chaveamento tende a infinito. Contudo, neste caso, é possível mostrar com uma simples manipulação das equações envolvidas que este problema não acontece. Substituir (\ref{ubar}), e (\ref{vsam}) em (\ref{vsvr}) leva a
+
+\begin{equation} \label{vsvr2}
+\begin{array}{lll}
+\hat{\varrho}	&	=	&	-\bar{\varrho}sgn(b_{n-1})sgn[z(-c_1z-x_2+\hat{a}_{n-1}y+\dot{y}_r)]	\\
+							&	=	&	-\bar{\varrho}sgn(b_{n-1})sgn(-c_1z^2-zx_2+\hat{a}_{n-1}yz+z\dot{y}_r))	\\
+							&	=	&	-\bar{\varrho}sgn(b_{n-1})sgn[-c_1z^2-zx_2-\bar{a}_{n-1}sgn(zy)zy+z\dot{y}_r)]	\\
+							&	=	&	-\bar{\varrho}sgn(b_{n-1})sgn[-c_1z^2-zx_2-\bar{a}_{n-1}|zy|+z\dot{y}_r)]	\\
+\end{array}
+\end{equation}
+
+\newpage
+\section{Resumo dos Controladores}
+
+A Tabela \ref{tab:resumo} apresenta uma síntese das equações desenvolvidas para os controladores deste capítulo.
+\begin{table}[htbp]
+	\caption{Resumo dos controladores adaptativos \textit{backstepping} e VS-ABC para plantas com grau relativo unitário.}
+	\large
+	\centering
+		\begin{tabular}{cccc}
+		\hline
+		\multicolumn{4}{|c|}{\textbf{Equações Comuns}} \\
+		\hline
+		\multicolumn{2}{|c|}{} & \multicolumn{2}{|l|}{Sinal de Controle:}\\ 
+		
+		\multicolumn{2}{|l|}{Erro de Saída} & \multicolumn{2}{|l|}{$u=\hat{\varrho}\bar{u}$}\\
+		
+		\multicolumn{2}{|l|}{$z=y-y_r$} &                 	  \multicolumn{2}{|l|}{$\bar{u}={-c_1z-x}_2+{\hat{a}}_{n-1}y+{\dot{y}}_r$}\\
+		\hline
+		\multicolumn{4}{|l|}{Observador: ver tabela \ref{tab:obs}}\\
+		\hline
+		\multicolumn{4}{|c|}{\textbf{Controlador Adaptativo \textit{Backstepping}}} \\
+		\hline
+		\multicolumn{4}{|l|}{Leis Adaptativas:} \\
+		\multicolumn{4}{|l|}{$\dot{\hat{a}}_{n-1}=-\gamma_1zy$} \\
+		\multicolumn{4}{|l|}{$\dot{\hat{\varrho}}=-\gamma_2sgn(b_{n-1})z\bar{u}$} \\	
+		\hline
+		\multicolumn{4}{|c|}{\textbf{Controlador Adaptativo \textit{Backstepping} a Estrutura Variável}} \\
+		\hline
+		\multicolumn{4}{|l|}{Leis Chaveadas:} \\
+		\multicolumn{4}{|l|}{$\hat{a}_{n-1}=-\bar{a}_{n-1}sgn(zy);\bar{a}_{n-1}>\left\vert{a}_{n-1}\right\vert$} \\
+		\multicolumn{4}{|l|}{$\hat{\varrho}=-\bar{\varrho}sgn(b_{n-1})sgn(z\bar{u});\bar{\varrho}>\left\vert{\varrho}\right\vert$} \\
+		\hline
+		\end{tabular}
+		\label{tab:resumo}
+\end{table}
+
+\section{Resultado das Simulações}
+
+Depois de definir a estrutura de todos os controladores nas seções anteriores, são realizadas simulações com uma planta instável de segunda ordem e grau relativo unitário. Os resultados são apresentados em três subseções. Na primeira, apresenta-se a comparação do desempenho dos controladores em que as variáveis de estado são mensuráveis, com o desempenho quando apenas a entrada e a saída da planta podem ser medidas, utilizando o Observador Adaptativo de Luenberger. Na subseção seguinte, os controladores desenvolvidos ao longo do capítulo são comparados com os controladores que utilizam os filtros K, mostrados no Apêndice \ref{Cap:apendice}. Por fim, na última subseção, são realizadas simulações para um mesmo controlador utilizando diferentes métodos de estimação dos parâmetros aplicados no observador. Além disso, em todas as subseções, testes de robustez na presença de distúrbios também são apresentados. 
+
+Considere-se o sistema utilizado em \cite{QUEIR08} e descrito por
+
+\begin{equation} \label{plantaGR1}
+y(s)=\frac{s+1}{s^2-3s+2}u(s),
+\end{equation}
+e um modelo de referência dado por
+
+\begin{equation} \label{modeloGR1}
+y_r(s)=\frac{s+1}{s^2+4s+4}r(s).
+\end{equation}
+
+\subsection{Variáveis de Estado Conhecidas $\times$ Variáveis de Estado Estimadas pelo Observador}
+
+Para a obtenção das variáveis de estado da planta será utilizado o observador descrito na Tabela \ref{tab:obs}, utilizando o método do gradiente com função de custo instantânea e os seguintes valores:
+
+\begin{equation} \label{gamadapum}
+\Gamma=\left[
+\begin{array}{cccc}
+1	&	0	&	0	&	 0	\\
+0	&	5	& 0	&	 0	\\
+0	&	0	&	9	&	 0	\\
+0	&	0	&	0	&	5,5	\\
+\end{array}
+\right].
+\end{equation}
+As condições iniciais dos parâmetros são $\theta_1(0)=0,91$, $\theta_2(0)=1,1$, $\theta_3(0)=-3,3$ e $\theta_4(0)=1,8$. E ainda $\Lambda(s)=s^2+2s+1$. Por fim $a^*_0=10$ e $a^*_1=25$.
+
+Nas Figuras \ref{fig11} e \ref{fig12} são apresentados, respectivamente, o comportamento do sistema considerando que as variáveis de estado estão disponíveis para medição e, o sinal de controle para o controlador adaptativo \textit{backstepping}. Nas Figuras \ref{fig21} e \ref{fig22} são apresentados o comportamento do sistema e o sinal de controle do controlador adaptativo \textit{backstepping} quando as variáveis de estado são obtidas por um observador e, demostrando o funcionamento deste observador, as Figuras \ref{fig31} e \ref{fig32} apresentam o comportamento das variáveis de estado $x_1$ e $x_2$, respectivamente, e suas estimativas.  
+
+Os ganhos adaptativos utilizados foram $\gamma_1=\gamma_2=200$ e a constante auxiliar $c_1=12$. Em todas as situações o sinal de entrada do modelo de referência foi $r(t)=1$, as condições iniciais para a planta foram $x_1(0)=0.15$ e $x_2(0)=0$, e $\hat{a}_{1}(0)=-2$ e $\hat{\varrho}(0)=0,6$ para o controlador adaptativo \textit{backstepping}. Para verificar o efeito de perturbações, acrescentou-se um degrau na entrada da planta $d(t)=2$ em $t=5s$. 
+
+Observando a Figura \ref{fig04}, a qual mostra o comportamento do sistema nas duas situações anteriores, percebe-se que a resposta com o observador apresenta um comportamento semelhante ao da situação em que as variáveis de estado estão disponíveis para medição.
+
+Substituindo agora o controlador adaptativo \textit{backstepping} pelo VS-ABC, as Figuras \ref{fig51} e \ref{fig52} mostram, respectivamente, a saída do sistema e o sinal de controle considerando as variáveis de estado conhecidas. As Figuras \ref{fig61} e \ref{fig62} mostram o mesmo resultado do caso anterior, considerando agora que as variáveis de estado são obtidas pelo observador e têm seu comportamento demonstrado nas Figuras \ref{fig71} e \ref{fig72}.  Em ambos os casos, as amplitudes dos relés foram $\bar{a}_1=7$ e $\bar{\varrho}=4$, e as demais constantes do controlador foram as mesmas dos casos anteriores. Analisando os resultados percebe-se que o comportamento nos dois casos foi praticamente o mesmo, um rápido transitório e a robustez à perturbação na entrada da planta, que foi totalmente rejeitada pelo controlador e não pode ser observada na saída, tendo seu efeito visível apenas no sinal de controle.
+
+\begin{figure}[!htbp] \begin{center}
+% fbox faz uma borda ao redor do seu argumento
+\subfigure[\label{fig11}]{\includegraphics[scale=0.4]{VSABCO/GR1/yxym_abc_estados_conhecidos_e_perturbação}}
+\subfigure[\label{fig12}]{\includegraphics[scale=0.4]{VSABCO/GR1/u_abc_estados_conhecidos_e_perturbação}}
+\caption{Saída do sistema e do modelo de referência do controlador adaptativo \textit{backstepping} para as variáveis de estado conhecidas e com perturbação (a), e sinal de controle na entrada da planta (b).}
+\label{fig1}
+\end{center} \end{figure}
+\newpage
+\begin{figure}[!htbp] \begin{center}
+% fbox faz uma borda ao redor do seu argumento
+\subfigure[\label{fig21}]{\includegraphics[scale=0.4]{VSABCO/GR1/yxym_abc_observador_e_perturbação}}
+\subfigure[\label{fig22}]{\includegraphics[scale=0.4]{VSABCO/GR1/u_abc_observador_e_perturbação}}
+\caption{Saída do sistema e do modelo de referência do controlador adaptativo \textit{backstepping} para as variáveis de estado estimadas pelo observador e com perturbação (a), e sinal de controle na entrada da planta (b).}
+\label{fig2}
+\end{center} \end{figure}
+\newpage
+\begin{figure}[!htbp] \begin{center}
+% fbox faz uma borda ao redor do seu argumento
+\subfigure[\label{fig31}]{\includegraphics[scale=0.4]{VSABCO/GR1/yxych_abc_observador_e_perturbação}}
+\subfigure[\label{fig32}]{\includegraphics[scale=0.4]{VSABCO/GR1/x2xx2ch_abc_observador_e_perturbação}}
+\caption{Variáveis de estado $x_1$ e $\hat{x}_1$ para o controlador adaptativo \textit{backstepping} estimadas pelo observador e com perturbação (a), e variáveis de estado $x_2$ e $\hat{x}_2$ (b).}
+\label{fig3}
+\end{center} \end{figure}
+\newpage
+\begin{figure}[h] \begin{center}
+% fbox faz uma borda ao redor do seu argumento
+{\includegraphics[scale=0.4]{VSABCO/GR1/Comparativo}}
+\caption{Comparativo entre as saídas mostradas nas figuras \ref{fig11} e \ref{fig21}, e a saída do modelo de referência do controlador adaptativo \textit{backstepping}.}
+\label{fig04}
+\end{center} \end{figure}
+\newpage
+\begin{figure}[!htbp] \begin{center}
+% fbox faz uma borda ao redor do seu argumento
+\subfigure[\label{fig51}]{\includegraphics[scale=0.4]{VSABCO/GR1/yxym_vsabc_estados_conhecidos_e_perturbação}}
+\subfigure[\label{fig52}]{\includegraphics[scale=0.4]{VSABCO/GR1/u_vsabc_estados_conhecidos_e_perturbação}}
+\caption{Saída do sistema e do modelo de referência do VS-ABC para as variáveis de estado conhecidas e com perturbação (a), e sinal de controle na entrada da planta (b).}
+\label{fig5}
+\end{center} \end{figure}
+\newpage
+\begin{figure}[!htbp] \begin{center}
+% fbox faz uma borda ao redor do seu argumento
+\subfigure[\label{fig61}]{\includegraphics[scale=0.4]{VSABCO/GR1/yxym_vsabc_observador_e_perturbação}}
+\subfigure[\label{fig62}]{\includegraphics[scale=0.4]{VSABCO/GR1/u_vsabc_observador_e_perturbação}}
+\caption{Saída do sistema e do modelo de referência do VS-ABC para as variáveis de estado estimadas pelo observador e com perturbação (a), e sinal de controle na entrada da planta (b).}
+\label{fig6}
+\end{center} \end{figure}
+\newpage
+\begin{figure}[!htbp] \begin{center}
+% fbox faz uma borda ao redor do seu argumento
+\subfigure[\label{fig71}]{\includegraphics[scale=0.4]{VSABCO/GR1/yxych_vsabc_observador_e_perturbação}}
+\subfigure[\label{fig72}]{\includegraphics[scale=0.4]{VSABCO/GR1/x2xx2ch_vsabc_observador_e_perturbação}}
+\caption{Variáveis de estado $x_1$ e $\hat{x}_1$  para o VS-ABC estimadas pelo observador e com perturbação (a), e variáveis de estado $x_2$ e $\hat{x}_2$ (b).}
+\label{fig7}
+\end{center} \end{figure}
+\pagebreak
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Observador $\times$ Filtros K}
+
+Nas Figuras \ref{fig81} e \ref{fig82}, apresentam-se o comportamento do sistema e o sinal de controle na entrada da planta para o controlador adaptativo \textit{backstepping} utilizando filtros K, desenvolvidos no Apêndice \ref{Cap:apendice}. Os ganhos adaptativos foram $\gamma_1=\gamma_2=\gamma_3=\gamma_4=100$ e as constantes auxiliares $c_1=d_1=18$. Já nas figuras \ref{fig91} e \ref{fig92} são apresentados o comportamento do sistema e o sinal de controle para o VS-ABC utilizando filtros K, com as amplitudes dos relés $\bar{\theta}_1=1,5$, $\bar{\theta}_2=1,5$, $\bar{\theta}_3=3,5$ e $\bar{\theta}_4=2,5$, mantendo os mesmos valores para as contantes auxiliares. Em ambos os casos o sinal de entrada do modelo de referência foi $r(t)=1$ e as condições iniciais para a planta foram $x_1(0)=0.15$ e $x_2(0)=0$. Assim como na subseção  anterior, para verificar o efeito de perturbações, acrescentou-se um degrau na entrada da planta $d(t)=2$ em $t=5s$.
+
+É possível observar que os controladores adaptativos \textit{backstepping} comportam-se de forma semelhante, contudo, o controlador que utiliza os filtros K desenvolveu um transitório mais suave que o controlador combinado com o observador, fato observado na Figura \ref{fig18}. Este comportamento é esperado, pois apesar de tornar o projeto mais intuitivo, o segundo controlador desconsidera a dinâmica do observador na fase de projeto. Já os filtros K têm  suas dinâmicas incluídas no projeto do controlador. Em contrapartida, estes filtros não apresentam nenhuma relação direta com as variáveis de estado do sistema, justificando assim a preferência no uso de observadores. 
+
+Quanto a comparação do VS-ABC, observa-se nas Figuras \ref{fig6} e \ref{fig9} que o comportamento do sistema é praticamente o mesmo. Todavia, o controlador combinado com o observador apresenta um sinal de controle maior, justificado pela mesma razão da diferença de comportamento entre os controladores adaptativos \textit{backstepping}. 
+
+\begin{figure}[!htbp] \begin{center}
+% fbox faz uma borda ao redor do seu argumento
+\subfigure[\label{fig81}]{\includegraphics[scale=0.4]{VSABCO/GR1/yxym_abc_k_perturbação}}
+\subfigure[\label{fig82}]{\includegraphics[scale=0.4]{VSABCO/GR1/u_abc_k_perturbação}}
+\caption{Saída do sistema e do modelo de referência do controlador adaptativo \textit{backstepping} com filtros K (a), e sinal de controle na entrada da planta (b).}
+\label{fig8}
+\end{center} \end{figure}
+\newpage
+\begin{figure}[!htbp] \begin{center}
+% fbox faz uma borda ao redor do seu argumento
+\subfigure[\label{fig91}]{\includegraphics[scale=0.4]{VSABCO/GR1/yxym_vsabc_k_perturbação}}
+\subfigure[\label{fig92}]{\includegraphics[scale=0.4]{VSABCO/GR1/u_vsabc_k_perturbação}}
+\caption{Saída do sistema e do modelo de referência do VS-ABC com filtros K (a), e sinal de controle na entrada da planta (b).}
+\label{fig9}
+\end{center} \end{figure}
+\pagebreak
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Método do Gradiente $\times$ Método dos Mínimos Quadrados}
+
+Nas Figuras \ref{fig101} e \ref{fig102} apresentam-se respectivamente, o comportamento do sistema e o sinal de controle para o controlador adaptativo \textit{backstepping} com os parâmetros do observador estimados pelo método do gradiente com função de custo integral. As Figuras \ref{fig111} e \ref{fig112} mostram o comportamento das variáveis de estado $x_1$ e $x_2$, respectivamente, e suas estimativas. A matriz de ganhos adaptativos do estimador é
+
+\begin{equation} \label{gamadapum}
+\Gamma=\left[
+\begin{array}{cccc}
+1	&	0	&	0	&	 0	\\
+0	&	5	& 0	&	 0	\\
+0	&	0	&	9	&	 0	\\
+0	&	0	&	0	&	5,5	\\
+\end{array}
+\right].
+\end{equation}
+As condições iniciais dos parâmetros são $\theta_1(0)=0,91$, $\theta_2(0)=1,1$, $\theta_3(0)=-3,3$ e $\theta_4(0)=1,8$. E ainda $\Lambda(s)=s^2+2s+1$. Por fim $a^*_0=a^*_1=4$ e $\beta=1$
+
+Os ganhos adaptativos utilizados foram $\gamma_1=\gamma_2=200$ e a constante auxiliar $c_1=12$. Em todas as situações o sinal de entrada do modelo de referência foi $r(t)=1$, as condições iniciais para a planta foram $x_1(0)=0.15$ e $x_2(0)=0$, e para o controlador adaptativo \textit{backstepping} $\hat{a}_{1}(0)=-2$ e $\hat{\varrho}(0)=0,6$. Mais uma vez, para verificar o efeito de perturbações, acrescentou-se um degrau na entrada da planta $d(t)=2$ em $t=5s$.
+
+Continuando com os resultados da utilização do método do gradiente com função de custo integral, as Figuras \ref{fig121} e \ref{fig122} apresentam, respectivamente, o comportamento do sistema e o sinal de controle para o VS-ABC. As Figuras \ref{fig111} e \ref{fig112} mostram o comportamento das variáveis de estado $x_1$ e $x_2$, respectivamente, e suas estimativas. 
+
+Substituindo novamente o método de estimação dos parâmetros, será utilizado nas simulações que seguem, o método dos mínimos quadrados com fator de esquecimento, ajustado com os seguintes valores:
+
+\begin{equation} \label{pdapum}
+\Gamma=\left[
+\begin{array}{cccc}
+10	&	0		&	0		&	 0	\\
+0		&	50	& 0		&	 0	\\
+0		&	0		&	90	&	 0	\\
+0		&	0		&	0		&	55	\\
+\end{array}
+\right].
+\end{equation}
+As condições iniciais dos parâmetros são $\theta_1(0)=0,91$, $\theta_2(0)=1,1$, $\theta_3(0)=-3,3$ e $\theta_4(0)=1,8$. E ainda $\Lambda(s)=s^2+2s+1$. Por fim $a^*_0=a^*_1=4$ e $\beta=8,7$
+
+Nas Figuras \ref{fig141} e \ref{fig142} são apresentados, respectivamente, o comportamento do sistema e o sinal de controle do controlador adaptativo \textit{backstepping}. As Figuras \ref{fig151} e \ref{fig152} mostram o comportamento das variáveis de estado $x_1$ e $x_2$, respectivamente, e suas estimativas. O VS-ABC apresenta-se nas Figuras \ref{fig161} e \ref{fig162}, que mostram o comportamento do sistema e o sinal de controle, e nas Figuras \ref{fig171} e \ref{fig172} que mostram, respectivamente, o comportamento das variáveis de estado $x_1$ e $x_2$ e suas estimativas. As amplitudes dos relés foram $\bar{a}_1=7$ e $\bar{\varrho}=4$, e as demais constantes do controlador foram as mesmas do caso anterior.
+
+Comparando estes resultados, e observando também a Figura \ref{fig19}, pode-se ver que mesmo substituindo os métodos de estimação dos parâmetros do observador, o controlador apresentou comportamentos semelhantes. No caso do VS-ABC, tanto o sistema quanto o sinal de controle foram iguais. Como afirmado no desenvolvimento ao longo do Capítulo \ref{cap:obs}, é possível realizar o projeto controlador com o observador adaptativo de Luenberguer, mesmo se forem utilizados métodos de estimação de parâmetros diferentes.
+
+
+
+\begin{figure}[!htbp] \begin{center}
+% fbox faz uma borda ao redor do seu argumento
+\subfigure[\label{fig101}]{\includegraphics[scale=0.4]{VSABCO/GR1/yxym_abc_i_observador_e_perturbação}}
+\subfigure[\label{fig102}]{\includegraphics[scale=0.4]{VSABCO/GR1/u_abc_i_observador_e_perturbação}}
+\caption{Saída do sistema e do modelo de referência do controlador adaptativo \textit{backstepping} para as variáveis de estado estimadas pelo observador utilizando o método do gradiente com função de custo integral e com perturbação (a), e sinal de controle na entrada da planta (b).}
+\label{fig10}
+\end{center} \end{figure}
+
+\begin{figure}[!htbp] \begin{center}
+% fbox faz uma borda ao redor do seu argumento
+\subfigure[\label{fig111}]{\includegraphics[scale=0.4]{VSABCO/GR1/yxych_abc_i_observador_e_perturbação}}
+\subfigure[\label{fig112}]{\includegraphics[scale=0.4]{VSABCO/GR1/x2xx2ch_abc_i_observador_e_perturbação}}
+\caption{Variáveis de estado $x_1$ e $\hat{x}_1$ para o controlador adaptativo \textit{backstepping} estimadas pelo observador utilizando o método do gradiente com função de custo integral e com perturbação (a), e variáveis de estado $x_2$ e $\hat{x}_2$ (b).}
+\label{fig011}
+\end{center} \end{figure}
+
+\begin{figure}[!htbp] \begin{center}
+% fbox faz uma borda ao redor do seu argumento
+\subfigure[\label{fig121}]{\includegraphics[scale=0.4]{VSABCO/GR1/yxym_vsabc_i_observador_e_perturbação}}
+\subfigure[\label{fig122}]{\includegraphics[scale=0.4]{VSABCO/GR1/u_vsabc_i_observador_e_perturbação}}
+\caption{Saída do sistema e do modelo de referência do VS-ABC para as variáveis de estado estimadas pelo observador utilizando o método do gradiente com função de custo integral e com perturbação (a), e sinal de controle na entrada da planta (b).}
+\label{fig012}
+\end{center} \end{figure}
+
+\begin{figure}[!htbp] \begin{center}
+% fbox faz uma borda ao redor do seu argumento
+\subfigure[\label{fig131}]{\includegraphics[scale=0.4]{VSABCO/GR1/yxych_vsabc_i_observador_e_perturbação}}
+\subfigure[\label{fig132}]{\includegraphics[scale=0.4]{VSABCO/GR1/x2xx2ch_vsabc_i_observador_e_perturbação}}
+\caption{Variáveis de estado $x_1$ e $\hat{x}_1$  para o VS-ABC estimadas pelo observador utilizando o método do gradiente com função de custo integral e com perturbação (a), e variáveis de estado $x_2$ e $\hat{x}_2$ (b).}
+\label{fig013}
+\end{center} \end{figure}
+
+\begin{figure}[!htbp] \begin{center}
+% fbox faz uma borda ao redor do seu argumento
+\subfigure[\label{fig141}]{\includegraphics[scale=0.4]{VSABCO/GR1/yxym_abc_mqfe_observador_e_perturbação}}
+\subfigure[\label{fig142}]{\includegraphics[scale=0.4]{VSABCO/GR1/u_abc_mqfe_observador_e_perturbação}}
+\caption{Saída do sistema e do modelo de referência do controlador adaptativo \textit{backstepping} para as variáveis de estado estimadas pelo observador utilizando o método dos mínimos quadrados e com perturbação (a), e sinal de controle na entrada da planta (b).}
+\label{fig014}
+\end{center} \end{figure}
+
+\begin{figure}[!htbp] \begin{center}
+% fbox faz uma borda ao redor do seu argumento
+\subfigure[\label{fig151}]{\includegraphics[scale=0.4]{VSABCO/GR1/yxych_abc_mqfe_observador_e_perturbação}}
+\subfigure[\label{fig152}]{\includegraphics[scale=0.4]{VSABCO/GR1/x2xx2ch_abc_mqfe_observador_e_perturbação}}
+\caption{Variáveis de estado $x_1$ e $\hat{x}_1$ para o controlador adaptativo \textit{backstepping} estimadas pelo observador utilizando o método dos mínimos quadrados e com perturbação (a), e variáveis de estado $x_2$ e $\hat{x}_2$ (b).}
+\label{fig015}
+\end{center} \end{figure}
+
+\begin{figure}[!htbp] \begin{center}
+% fbox faz uma borda ao redor do seu argumento
+\subfigure[\label{fig161}]{\includegraphics[scale=0.4]{VSABCO/GR1/yxym_vsabc_mqfe_observador_e_perturbação}}
+\subfigure[\label{fig162}]{\includegraphics[scale=0.4]{VSABCO/GR1/u_vsabc_mqfe_observador_e_perturbação}}
+\caption{Saída do sistema e do modelo de referência do VS-ABC para as variáveis de estado estimadas pelo observador utilizando o método dos mínimos quadrados e com perturbação (a), e sinal de controle na entrada da planta (b).}
+\label{fig016}
+\end{center} \end{figure}
+
+\begin{figure}[!htbp] \begin{center}
+% fbox faz uma borda ao redor do seu argumento
+\subfigure[\label{fig171}]{\includegraphics[scale=0.4]{VSABCO/GR1/yxych_vsabc_mqfe_observador_e_perturbação}}
+\subfigure[\label{fig172}]{\includegraphics[scale=0.4]{VSABCO/GR1/x2xx2ch_vsabc_mqfe_observador_e_perturbação}}
+\caption{Variáveis de estado $x_1$ e $\hat{x}_1$  para o VS-ABC estimadas pelo observador utilizando o método dos mínimos quadrados e com perturbação (a), e variáveis de estado $x_2$ e $\hat{x}_2$ (b).}
+\label{fig017}
+\end{center} \end{figure}
+
+\begin{figure}[!htbp] \begin{center}
+% fbox faz uma borda ao redor do seu argumento
+\subfigure[\label{fig18}]
+{\includegraphics[scale=0.4]{VSABCO/GR1/ComparativoG-K}}
+\subfigure[\label{fig19}]
+{\includegraphics[scale=0.4]{VSABCO/GR1/ComparativoEst}}
+\caption{Comparativo entre as saídas mostradas nas figuras (\ref{fig2}) e (\ref{fig8}) (a), e as figuras (\ref{fig2}), (\ref{fig10}), e (\ref{fig014}) (b), e a saída do modelo de referência do controlador adaptativo \textit{backstepping}.}
+\label{fig20}
+\end{center} \end{figure}

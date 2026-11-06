@@ -1,0 +1,7 @@
+~$*
+*.tmp
+# Se usar LaTeX:
+*.aux
+*.log
+*.out
+*.synctex.gz

@@ -1,0 +1,20 @@
+%%
+%% Capítulo 5: Conclusões
+%%
+
+\mychapter{Considerações Finais e Perspectivas}
+\label{Cap:conclusao}
+\hyphenation {mi-nu-ci-o-so}
+
+Tentar solucionar o problema de controlar sistemas com parâmetros desconhecidos tem sido objeto de pesquisa para muitos estudiosos, objeto esse que gerou o desenvolvimento de muitas técnicas de controle adaptativo. A escolha do controle \textit{backstepping} como foco se deu porque o referido controle apresenta muitas vantagens de desempenho em relação aos demais controladores adaptativos. 
+
+O desenvolvimento de um controlador adaptativo \textit{backstepping} a estrutura variável (VS-ABC) para uma planta de grau relativo unitário, substituindo os filtros K por um Observador Adaptativo de Luenberguer permitiu tornar o projeto bem mais intuitivo. Este observador adaptativo foi baseado no Observador de Luenberguer clássico com uma técnica de estimação de parâmetros. 
+
+Esta substituição diminui a dependência dos parâmetros desconhecidos da planta na fase de projeto, já que as variáveis de estado são consideradas conhecidas. E ainda, utilizar leis chaveadas ao invés das leis integrais tradicionais melhoraram o desempenho transitório do sistema e aumentaram a robustez perante distúrbios externos na entrada da planta. As simulações demonstraram a comparação do desempenho do controlador projetado considerando quando as variáveis de estado são estimadas por um observador, quando estão disponíveis para medição, quando são utilizados filtros K, e ainda quando diferentes métodos de estimação de parâmetros são aplicados ao observador, possibilitando a constatação de que o uso dos observadores ao invés dos filtros K manteve o bom desempenho do controlador. As simulações demonstraram também a robustez a distúrbios externos na entrada da planta, pois o VS-ABC rejeita estas perturbações.
+
+O VS-ABC para plantas com grau relativo $n$ e sem zeros, apesar de não ser o objetivo principal deste trabalho, mostrou-se necessário para mostrar o bom funcionamento do controlador aliado ao observador proposto. Para corroborar com esta premissa, simulações mostraram a comparação do desempenho deste controlador em duas situações, uma em que as variáveis de estado eram consideradas conhecidas, e outra em que eram estimadas pelo observador.
+
+
+Com a intenção de melhorar ainda mais o controlador desenvolvido, pretende-se em estudos futuros, substituir o Observador Adaptativo de Luenberguer por outros observadores adaptativos com melhor desempenho, como o Observador \textit{Sliding Mode} ~\cite{SLOT86} por exemplo. Assim como estender esta aplicação a outras abordagens do controle \textit{backstepping}, como a abordagem modular.
+
+Por fim, outra perspectiva é a generalização da aplicação do controlador a plantas com grau relativo qualquer, para que possa haver mais chances de implementá-lo na prática, como no controle de velocidade de motores de indução, controle de sistemas de acionamento e de processos em geral.

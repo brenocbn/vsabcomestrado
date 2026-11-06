@@ -1,0 +1,240 @@
+% Esta primeira linha dá informações gerais sobre o documento.
+% PARA A VERSÃO FINAL:
+% papel A4, letra grande (12pt), openright (capítulos só iniciam em página direita, se necessário incluindo uma página em branco),twoside (o documento vai ser impresso em frente e costa)
+\documentclass[a4paper,12pt,openright,twoside]{book}
+% PARA A QUALIFICAÇÃO E PARA A VERSÃO INICIAL:
+% papel A4, letra grande (12pt), openany (capítulos iniciam em qualquer página), oneside (o documento vai ser impresso só na frente)
+%\documentclass[a4paper,12pt,openany,oneside,]{book}
+%\documentclass{abnt}
+%digitar diretamente as letras com acento
+\usepackage[latin1]{inputenc} 
+\usepackage{ae}
+% Para usar fontes standard ao invés das do LaTeX (gera melhores PDFs)
+%\usepackage{pslatex}
+%\usepackage[ansinew]{inputenc}%alteração 06/08
+% Para a hifenização em português
+\usepackage[portuges,brazilian]{babel} 
+% Para que os primeiros parágrafos das seções também sejam indentados
+\usepackage{indentfirst} 
+% Para poder incluir gráficos (figuras)
+\usepackage{graphicx}
+\usepackage[portuguese,noprefix]{nomencl}%alteração 06/08
+%\usepackage[portuguese,noprefix,refeq,refpage]{nomencl} % Para poder fazer glossário ou lista de símbolos
+%[pdftex]
+\usepackage[pdftex]{hyperref}
+%\usepackage{nomencl}
+% Para permitir espaçamento Cap:apendicesimples, 1 1/2 e duplo
+\usepackage{setspace}
+% Para usar alguns comandos matemáticos avançados muito úteis
+\usepackage{amsmath} 
+\usepackage{amsfonts}
+\usepackage{amssymb,amsbsy}
+% Para poder usar o ambiente "comment"
+\usepackage{verbatim} 
+% Para poder ter tabelas com colunas de largura auto-ajustável
+\usepackage{tabularx} 
+% Para executar um comando depois do fim da página corrente
+\usepackage{afterpage} 
+\usepackage{booktabs}
+% Para as citações bibliográficas no formato da ABNT
+\usepackage[alf, bibjustif]{abntcite}
+% Para as citações bibliográficas
+
+%\usepackage[abbr]{harvard}	% As chamadas são sempre abreviadas
+%\harvardparenthesis{square}	% Colchetes nas chamadas
+%\harvardyearparenthesis{round}	% Parêntesis nos anos das referências
+%\renewcommand{\harvardand}{e}	% Substituir "&" por "e" nas referências
+% Coloca colchetes na chamada de referências
+%\citebrackets[] 
+% Coloca colchetes nas referências
+\usepackage{colchetesrefs} 
+%\usepackage{html} % Para que funcione o '\usepackage[abbr]{harvard}' tenesmo que adicionar antes dele, '\usepackage{html}' e '\usepackage{url}' . E antes de comenzar a colocar o texto, deve ser colocado '\renewcommand{\harvardurl}{URL: \url'. 
+%\usepackage{url}
+\usepackage{noitemsep}
+%\usepackage{bibtexlogo}
+
+%Pacotes Opcionais:
+% Para poder incluir arquivos Postscript com cores (do Xfig, por exemplo)
+\usepackage{color} 
+%usar subfiguras
+\usepackage{subfigure}
+\usepackage{makeidx}%alteração 06/08
+% Para ter células em tabelas que ocupam mais de uma linha
+\usepackage{multirow} 
+% Para poder ter tabelas longas em mais de uma página
+%\usepackage{longtable}
+% Para poder escrever partes do texto em "n" colunas
+%\usepackage{multicol}
+% Se você quiser personalizar os cabeçalhos das páginas
+\usepackage{fancyhdr}
+% Para incluir algoritmos e listagens de códigos
+%\usepackage{listings}
+% Capítulos com títulos em um formato "decorado"
+%\usepackage[Rejne]{teste}
+\usepackage{capitulos}
+%Comandos novos
+\input{comandos.tex} 
+
+% Direção horizontal
+\setlength{\oddsidemargin}{3.5cm} % Nas páginas ímpares
+\setlength{\evensidemargin}{2.5cm} % Nas páginas pares
+\setlength{\textwidth}{15cm} % Largura do texto
+\addtolength{\oddsidemargin}{-1in}
+\addtolength{\evensidemargin}{-1in} %a margem
+% real seria de 3.5+2.54=6.04cm. Para permitir que você não tenha que
+% fazer esta conta, pode usar o número desejado nas linhas anteriores
+% e a gente subtrai 1in nas próximas linhas
+
+% Direção vertical-------------------------------------------------------
+% Margem superior (entre o topo da folha e o cabeçalho), altura do
+% cabeçalho e distância entre o fim do cabeçalho e o início do texto
+\setlength{\topmargin}{2.0cm} % Margem real desejada
+\setlength{\headheight}{1.0cm}
+\setlength{\headsep}{1.0cm}
+\setlength{\textheight}{22.7cm} % Altura do texto (sem cabeçalho e rodapé)
+\setlength{\footskip}{1.0cm} % Distância do fim do texto ao rodapé
+\addtolength{\topmargin}{-1in} %subtrai 1in na próxima linha
+% Line spacing -----------------------------------------------------------
+\newlength{\defbaselineskip}
+\setlength{\defbaselineskip}{\baselineskip}
+\newcommand{\setlinespacing}[1]%
+           {\setlength{\baselineskip}{#1 \defbaselineskip}}
+%
+% O estilo das referências bibliográficas
+%
+
+%\bibliographystyle{ppgee}
+
+% As páginas iniciais são sempre em espaçamento simples
+\singlespacing
+ 
+% Para a criação do glossário (ou lista de símbolos)
+%\makeglossary
+\makenomenclature
+% Lista de arquivos a serem processados. Estes comandos "includeonly" são
+% dispensáveis e devem obrigatoriamente ser comentados na hora de gerar o
+% documento definitivo. Eles servem para compilar apenas parte do documento.
+% É útil, durante a redação, para que não se tenha de compilar todo o
+% documento a cada vez que se faz uma alteração. Por exemplo, se eu estou
+% fazendo alterações na dedicatória e as outras partes não têm interesse no
+% momento, posso incluir (descomentar) a linha "\includeonly{preambulo}"
+%\includeonly{rosto}
+%\includeonly{catalograficos}
+%\includeonly{preambulo}
+%\includeonly{resumos}
+%\includeonly{introducao/introducao}
+%\includeonly{vsabcon/vsabcon}
+%\includeonly{estilo/estilo}
+%\includeonly{matematica/matematica}
+%\includeonly{figuras/figuras}
+%\includeonly{conclusao/conclusao}
+%\includeonly{apendice/apendice}
+%\includeonly{otimizacao/otimizacao}
+
+
+% Inicia o texto
+\begin{document} 
+
+% Paginas iniciais (sem numeração)
+\pagestyle{empty} 
+
+
+%\include{capa}
+% Página de rosto (capa interna)
+\include{rosto}
+  
+
+\include{catalograficos} 
+\include{preambulo} 
+%
+% O espaçamento entre linhas
+%
+
+% PARA A VERSÃO FINAL:
+% Deve ser usado espaçamento simples nas páginas de texto
+%\singlespacing
+% PARA A QUALIFICAÇÃO E PARA A VERSÃO INICIAL:
+% Deve ser usado espaçamento 1 1/2 nas páginas de texto
+\onehalfspacing 
+
+% Resumo/Abstract
+
+\include{resumos}
+
+% Paginas introdutórias (com numeração romana)
+\frontmatter 
+% Lista de conteúdo (sumário, gerado automaticamente)
+\cleardoublepage
+\addcontentsline{nottoc}{chapter}{Sumário}
+\tableofcontents
+% Lista de figuras (gerada automaticamente)
+\cleardoublepage  
+\addcontentsline{toc}{chapter}{Lista de Figuras}
+\listoffigures
+% Lista de tabelas (gerada automaticamente)
+\cleardoublepage 
+\addcontentsline{toc}{chapter}{Lista de Tabelas}
+\listoftables 
+
+%Glossário (gerado automaticamente - veja entradas em
+% introducao/introducao.tex e em estilo/estilo.tex)
+\cleardoublepage
+\renewcommand{\nomname}{Lista de Abreviaturas}
+\markboth{\MakeUppercase{\nomname}}{\MakeUppercase{\nomname}}
+\addcontentsline{toc}{chapter}{\nomname}
+% O argumento opcional do comando \printglossary é a largura deixada
+% para os símbolos no glossário. Se seus símbolos são "largos", como
+% neste exemplo,  é melhor por mais espaço do que o 1cm que é reservado
+% por default
+%\printglossary
+\printnomenclature[2.5cm]
+
+% Páginas do texto principal (com cabeçalho)
+\mainmatter
+%\pagestyle{headings}
+\pagestyle{fancy}
+\newcommand\nomecapitulo{}
+\renewcommand\chaptermark[1]{\renewcommand\nomecapitulo{ #1}}
+\lhead{\chaptername \space \thechapter. \space \nomecapitulo}
+\rhead{\thepage}
+\chead{}
+\lfoot{}
+\cfoot{}
+\rfoot{}
+% Para facilitar a organização, foi criado um diretório para cada
+% capítulo do documento, pois assim os arquivos das figuras ficam
+% classificados por capítulos
+
+% Cap. 1 - Introdução
+\include{introducao/introducao}
+
+% Cap. 2 - Observador de Estados
+\include{observ/observador}
+
+% Cap. 3 - VS-ABC com Observadores de Estado - Grau Relativo $n$ sem zeros
+\include{VSABCO/vsabco}
+
+% Cap. 4 - 
+\include{vsabcon/vsabcon}
+
+% Cap. 5 - Conclusões e Perspectivas
+\include{conclusao/conclusao}
+
+\pagestyle{fancy}
+\lhead{\bibname}
+\rhead{\thepage}
+\chead{}
+\lfoot{}
+\cfoot{}
+\rfoot{}
+
+% Referências bibliogáficas (geradas automaticamente)
+\addcontentsline{toc}{chapter}{Referências Bibliográficas}
+\bibliography{bibliografia}
+
+\appendix
+
+%Apendice A - VS-ABC com filtros k
+\include{apendice/apendice}
+
+\end{document}

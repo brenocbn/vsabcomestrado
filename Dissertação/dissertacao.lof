@@ -1,0 +1,76 @@
+\select@language {brazilian}
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {1.1}{\ignorespaces Diagrama de blocos do controle \textit {backstepping} com um observador}}{4}{figure.1.1}
+\contentsline {figure}{\numberline {1.2}{\ignorespaces Superf\IeC {\'\i }cie de deslizamento para o sistema da equa\c c\~ao (\ref {schav})}}{7}{figure.1.2}
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Sa\IeC {\'\i }da do sistema e do modelo de refer\^encia do controlador adaptativo \textit {backstepping} para as vari\'aveis de estado conhecidas e com perturba\c c\~ao (a), e sinal de controle na entrada da planta (b).}}{25}{figure.3.1}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {}}}{25}{figure.3.1}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {}}}{25}{figure.3.1}
+\contentsline {figure}{\numberline {3.2}{\ignorespaces Sa\IeC {\'\i }da do sistema e do modelo de refer\^encia do controlador adaptativo \textit {backstepping} para as vari\'aveis de estado estimadas pelo observador e com perturba\c c\~ao (a), e sinal de controle na entrada da planta (b).}}{26}{figure.3.2}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {}}}{26}{figure.3.2}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {}}}{26}{figure.3.2}
+\contentsline {figure}{\numberline {3.3}{\ignorespaces Vari\'aveis de estado $x_1$ e $\mathaccentV {hat}05E{x}_1$ para o controlador adaptativo \textit {backstepping} estimadas pelo observador e com perturba\c c\~ao (a), e vari\'aveis de estado $x_2$ e $\mathaccentV {hat}05E{x}_2$ (b).}}{27}{figure.3.3}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {}}}{27}{figure.3.3}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {}}}{27}{figure.3.3}
+\contentsline {figure}{\numberline {3.4}{\ignorespaces Comparativo entre as sa\IeC {\'\i }das mostradas nas figuras \ref {fig11} e \ref {fig21}, e a sa\IeC {\'\i }da do modelo de refer\^encia do controlador adaptativo \textit {backstepping}.}}{28}{figure.3.4}
+\contentsline {figure}{\numberline {3.5}{\ignorespaces Sa\IeC {\'\i }da do sistema e do modelo de refer\^encia do VS-ABC para as vari\'aveis de estado conhecidas e com perturba\c c\~ao (a), e sinal de controle na entrada da planta (b).}}{29}{figure.3.5}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {}}}{29}{figure.3.5}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {}}}{29}{figure.3.5}
+\contentsline {figure}{\numberline {3.6}{\ignorespaces Sa\IeC {\'\i }da do sistema e do modelo de refer\^encia do VS-ABC para as vari\'aveis de estado estimadas pelo observador e com perturba\c c\~ao (a), e sinal de controle na entrada da planta (b).}}{30}{figure.3.6}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {}}}{30}{figure.3.6}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {}}}{30}{figure.3.6}
+\contentsline {figure}{\numberline {3.7}{\ignorespaces Vari\'aveis de estado $x_1$ e $\mathaccentV {hat}05E{x}_1$ para o VS-ABC estimadas pelo observador e com perturba\c c\~ao (a), e vari\'aveis de estado $x_2$ e $\mathaccentV {hat}05E{x}_2$ (b).}}{31}{figure.3.7}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {}}}{31}{figure.3.7}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {}}}{31}{figure.3.7}
+\contentsline {figure}{\numberline {3.8}{\ignorespaces Sa\IeC {\'\i }da do sistema e do modelo de refer\^encia do controlador adaptativo \textit {backstepping} com filtros K (a), e sinal de controle na entrada da planta (b).}}{33}{figure.3.8}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {}}}{33}{figure.3.8}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {}}}{33}{figure.3.8}
+\contentsline {figure}{\numberline {3.9}{\ignorespaces Sa\IeC {\'\i }da do sistema e do modelo de refer\^encia do VS-ABC com filtros K (a), e sinal de controle na entrada da planta (b).}}{34}{figure.3.9}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {}}}{34}{figure.3.9}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {}}}{34}{figure.3.9}
+\contentsline {figure}{\numberline {3.10}{\ignorespaces Sa\IeC {\'\i }da do sistema e do modelo de refer\^encia do controlador adaptativo \textit {backstepping} para as vari\'aveis de estado estimadas pelo observador utilizando o m\'etodo do gradiente com fun\c c\~ao de custo integral e com perturba\c c\~ao (a), e sinal de controle na entrada da planta (b).}}{37}{figure.3.10}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {}}}{37}{figure.3.10}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {}}}{37}{figure.3.10}
+\contentsline {figure}{\numberline {3.11}{\ignorespaces Vari\'aveis de estado $x_1$ e $\mathaccentV {hat}05E{x}_1$ para o controlador adaptativo \textit {backstepping} estimadas pelo observador utilizando o m\'etodo do gradiente com fun\c c\~ao de custo integral e com perturba\c c\~ao (a), e vari\'aveis de estado $x_2$ e $\mathaccentV {hat}05E{x}_2$ (b).}}{38}{figure.3.11}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {}}}{38}{figure.3.11}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {}}}{38}{figure.3.11}
+\contentsline {figure}{\numberline {3.12}{\ignorespaces Sa\IeC {\'\i }da do sistema e do modelo de refer\^encia do VS-ABC para as vari\'aveis de estado estimadas pelo observador utilizando o m\'etodo do gradiente com fun\c c\~ao de custo integral e com perturba\c c\~ao (a), e sinal de controle na entrada da planta (b).}}{39}{figure.3.12}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {}}}{39}{figure.3.12}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {}}}{39}{figure.3.12}
+\contentsline {figure}{\numberline {3.13}{\ignorespaces Vari\'aveis de estado $x_1$ e $\mathaccentV {hat}05E{x}_1$ para o VS-ABC estimadas pelo observador utilizando o m\'etodo do gradiente com fun\c c\~ao de custo integral e com perturba\c c\~ao (a), e vari\'aveis de estado $x_2$ e $\mathaccentV {hat}05E{x}_2$ (b).}}{40}{figure.3.13}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {}}}{40}{figure.3.13}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {}}}{40}{figure.3.13}
+\contentsline {figure}{\numberline {3.14}{\ignorespaces Sa\IeC {\'\i }da do sistema e do modelo de refer\^encia do controlador adaptativo \textit {backstepping} para as vari\'aveis de estado estimadas pelo observador utilizando o m\'etodo dos m\IeC {\'\i }nimos quadrados e com perturba\c c\~ao (a), e sinal de controle na entrada da planta (b).}}{41}{figure.3.14}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {}}}{41}{figure.3.14}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {}}}{41}{figure.3.14}
+\contentsline {figure}{\numberline {3.15}{\ignorespaces Vari\'aveis de estado $x_1$ e $\mathaccentV {hat}05E{x}_1$ para o controlador adaptativo \textit {backstepping} estimadas pelo observador utilizando o m\'etodo dos m\IeC {\'\i }nimos quadrados e com perturba\c c\~ao (a), e vari\'aveis de estado $x_2$ e $\mathaccentV {hat}05E{x}_2$ (b).}}{42}{figure.3.15}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {}}}{42}{figure.3.15}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {}}}{42}{figure.3.15}
+\contentsline {figure}{\numberline {3.16}{\ignorespaces Sa\IeC {\'\i }da do sistema e do modelo de refer\^encia do VS-ABC para as vari\'aveis de estado estimadas pelo observador utilizando o m\'etodo dos m\IeC {\'\i }nimos quadrados e com perturba\c c\~ao (a), e sinal de controle na entrada da planta (b).}}{43}{figure.3.16}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {}}}{43}{figure.3.16}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {}}}{43}{figure.3.16}
+\contentsline {figure}{\numberline {3.17}{\ignorespaces Vari\'aveis de estado $x_1$ e $\mathaccentV {hat}05E{x}_1$ para o VS-ABC estimadas pelo observador utilizando o m\'etodo dos m\IeC {\'\i }nimos quadrados e com perturba\c c\~ao (a), e vari\'aveis de estado $x_2$ e $\mathaccentV {hat}05E{x}_2$ (b).}}{44}{figure.3.17}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {}}}{44}{figure.3.17}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {}}}{44}{figure.3.17}
+\contentsline {figure}{\numberline {3.18}{\ignorespaces Comparativo entre as sa\IeC {\'\i }das mostradas nas figuras (\ref {fig2}) e (\ref {fig8}) (a), e as figuras (\ref {fig2}), (\ref {fig10}), e (\ref {fig014}) (b), e a sa\IeC {\'\i }da do modelo de refer\^encia do controlador adaptativo \textit {backstepping}.}}{45}{figure.3.18}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {}}}{45}{figure.3.18}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {}}}{45}{figure.3.18}
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {4.1}{\ignorespaces Diagrama de Blocos do Controlador Adaptativo \textit {Backstepping}}}{54}{figure.4.1}
+\contentsline {figure}{\numberline {4.2}{\ignorespaces Diagrama de Blocos do Controlador Adaptativo \textit {Backstepping} a Estrutura Vari\'avel}}{56}{figure.4.2}
+\contentsline {figure}{\numberline {4.3}{\ignorespaces Sistema Massa-Mola-Amortecedor}}{58}{figure.4.3}
+\contentsline {figure}{\numberline {4.4}{\ignorespaces Sa\IeC {\'\i }da do sistema e do modelo de refer\^encia do controlador adaptativo \textit {backstepping} com as vari\'aveis de estado conhecidas (a), e sinal de controle na entrada da planta (b).}}{60}{figure.4.4}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {}}}{60}{figure.4.4}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {}}}{60}{figure.4.4}
+\contentsline {figure}{\numberline {4.5}{\ignorespaces Sa\IeC {\'\i }da do sistema e do modelo de refer\^encia do controlador adaptativo \textit {backstepping} com as vari\'aveis de estado estimadas por um observador (a), e sinal de controle na entrada da planta (b).}}{61}{figure.4.5}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {}}}{61}{figure.4.5}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {}}}{61}{figure.4.5}
+\contentsline {figure}{\numberline {4.6}{\ignorespaces Sa\IeC {\'\i }da do sistema e do modelo de refer\^encia do VS-ABC com as vari\'aveis de estado conhecidas (a), e sinal de controle na entrada da planta (b).}}{62}{figure.4.6}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {}}}{62}{figure.4.6}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {}}}{62}{figure.4.6}
+\contentsline {figure}{\numberline {4.7}{\ignorespaces Sa\IeC {\'\i }da do sistema e do modelo de refer\^encia do VS-ABC com as vari\'aveis de estado estimadas por um observador (a), e sinal de controle na entrada da planta (b).}}{63}{figure.4.7}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {}}}{63}{figure.4.7}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {}}}{63}{figure.4.7}
+\addvspace {10\p@ }
+\addvspace {10\p@ }

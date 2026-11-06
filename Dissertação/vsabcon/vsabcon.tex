@@ -1,0 +1,522 @@
+%%
+%% Capítulo 4: VS-ABC com Observadores de Estado - Grau Relativo $n$ sem zeros
+%%
+
+\mychapter{VS-ABC com Observadores de Estado - Plantas com Grau Relativo $n$ e sem Zeros}
+\label{Cap:VSABCON}
+\section{Introdução}
+
+Com o intuito de estender os resultados a plantas com grau relativo $n$, este capítulo demonstra o desenvolvimento do controlador adaptativo \textit{backsteping} desenvolvido em ~\cite{KOK95} para sistemas não lineares, aplicado a um sistema linear e, considerando que as variáveis de estado são medidas ou obtidas por um observador. As leis integrais de adaptação desenvolvidas serão substituídas por leis chaveadas, e para evitar que esta substituição se torne muito complexa é necessário que a planta não tenha zeros, já que nesta configuração as leis de adaptação são propostas somente no último passo do projeto, pois que apenas $\dot{x}_n$ depende dos parâmetros.
+
+Considerando-se o sistema SISO, LTI e com grau relativo $n$ e sem zeros descrito abaixo
+
+\begin{equation} \label{sistn}
+\begin{array}{c}
+\dot{x}_1=x_2 \\
+\dot{x}_2=x_3 \\
+\vdots				\\
+\dot{x}_n=-a_{n-1}x_n-\cdots-a_1x_2-a_0x_1+ku \\
+y=x_1\\
+\end{array}
+\end{equation}
+onde $y$ é a saída do sistema e $u$ é o sinal de controle a ser projetado. A equação para a derivada da variável de estado $x_n$ também pode ser representada por
+
+\begin{equation} \label{xnp}
+\dot{x}_n=-\textbf{a}^T\textbf{x}+ku 
+\end{equation}
+onde
+
+\begin{equation} \label{xs}
+\textbf{x}=\left[
+\begin{array}{c}
+x_n 		\\
+\vdots 	\\
+x_1			\\
+\end{array}
+\right]
+\end{equation}
+e
+
+\begin{equation} \label{as}
+\textbf{a}=\left[
+\begin{array}{c}
+a_{n-1} 		\\
+\vdots 	\\
+a_0			\\
+\end{array}
+\right].
+\end{equation}
+
+O objetivo de controle é forçar a saída do sistema ($y(t)$) a seguir a saída de um modelo de referência. Assumindo o modelo como um sistema LTI, estável e descrito como
+
+\begin{equation} \label{moref}
+y_r=\dfrac{k_r}{s^n+a_{r,n-1}s^{n-1}+\cdots+a_{r,0}}r,
+\end{equation}
+sendo o denominador um polinômio \textit{Hurwitz}, $k_r>0$ e $r(t)$, um sinal uniformemente limitado e contínuo por partes. Além disso, todas as variáveis de estado do modelo de referência estão disponíveis.
+
+\section{Controlador Adaptativo \textit{Backstepping}}
+
+Para o projeto do controlador considera-se inicialmente que $x_2$ é a variável de controle na equação (\ref{sistn}) e uma lei de controle intermediária é obtida estabilizando o subsistema por uma função de Lyapunov. A cada passo seguinte, o controle é projetado para um novo subsistema aumentando uma equação. No ``i-ésimo'' passo, o ``i-ésimo'' sistema é estabilizado por uma função de Lyapunov $V_i$ projetada com uma ``função de estabilização'' (FE) $\alpha_i$. As leis de adaptação dos parâmetros e o sinal de controle só serão projetados no último passo.
+
+\nomenclature{FE:}{Função de Estabilização}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{description}
+\item[Passo 1.] Considerando as seguintes variáveis de erro
+\end{description}
+
+\begin{equation}\label{zum}
+z_1=x_1-y_r,
+\end{equation}
+
+\begin{equation}\label{zdois}
+z_2=x_2-\dot{y}_r-\alpha_1
+\end{equation}
+reescreve-se $\dot{x}_1$ a partir de (\ref{sistn}) e (\ref{zdois}),
+
+\begin{equation}\label{xsump}
+\dot{x}_1=z_2+\dot{y}_r+\alpha_1.
+\end{equation}
+Obtém-se, então, a derivada de $z_1$ a partir das equações (\ref{zum}) e (\ref{xsump}).
+
+\begin{equation} \label{zump}
+\begin{array}{lll}
+\dot{z}_1	& =	&z_2+\dot{y}_r+\alpha_1-\dot{y}_r\\
+					& =	&z_2+\alpha_1\\
+\end{array}
+\end{equation}
+
+O objetivo neste passo é garantir a estabilidade do subsistema descrito na equação (\ref{xsump}) a partir da candidata à função de Lyapunov a seguir
+
+\begin{equation}\label{vum}
+V_1=\dfrac{1}{2}z^2_1
+\end{equation}
+que tem derivada
+
+\begin{equation}\label{vump}
+\begin{array}{lll}
+\dot{V}_1	&	=	&z_1\dot{z}_1				\\
+					&	=	&z_1(z_2+\alpha_1).	\\
+\end{array}
+\end{equation}
+
+Se $x_2$ fosse realmente a variável de controle, não haveria necessidade de $z_2$, uma vez que $z_2$ é a diferença entre o que está sendo aplicado e o que deveria ser aplicado realmente caso $x_2$ fosse a variável de controle. Assim, já que $x_2$ não é variável de controle só se pode definir a função de estabilização $\alpha_1$. Então,
+
+\begin{equation}\label{alfaum}
+\alpha_1=-c_1z_1
+\end{equation}
+e, substituindo (\ref{alfaum}) em (\ref{vump}), tem-se
+
+\begin{equation}\label{vump2}
+\dot{V}_1=-c_1z^2_1+z_1z_2.
+\end{equation}
+				
+O termo de sinal indefinido, $z_1z_2$, só poderá ser cancelado no próximo passo do projeto.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{description}
+\item[Passo 2.] Considerando agora $x_3$ como variável de controle, é necessário definir o erro como
+\end{description}
+
+\begin{equation}\label{ztres}
+z_3=x_3-\ddot{y}_r-\alpha_2
+\end{equation}
+e, reescrevendo $\dot{x}_2$ a partir de (\ref{sistn}) e (\ref{ztres})
+
+\begin{equation}\label{xsdoisp}
+\dot{x}_2=z_3+\ddot{y}_r+\alpha_2.
+\end{equation}
+então, a partir das equações (\ref{ztres}) e (\ref{xsdoisp}) a derivada de $z_1$ é
+
+\begin{equation} \label{zdoisp}
+\begin{array}{lll}
+\dot{z}_2	& =	&	\dot{x}_2-\ddot{y}_r-\dot{\alpha}_1	\\
+					& =	&	z_3+\ddot{y}_r+\alpha_2-\ddot{y}_r-\dfrac{\partial{}\alpha_1}{\partial{}x_1}\dot{x}_1-\dfrac{\partial{}\alpha_1}{\partial{}y_r}\dot{y}_r								\\
+					&	=	&	z_3+\alpha_2-\dfrac{\partial{}\alpha_1}{\partial{}x_1}x_2-\dfrac{\partial{}\alpha_1}{\partial{}y_r}\dot{y}_r.								\\
+\end{array}
+\end{equation}
+
+Definindo uma nova candidata à função de Lyapunov
+
+\begin{equation}\label{vdois}
+V_2=V_1+\dfrac{1}{2}z^2_2
+\end{equation}
+e com base em (\ref{zdoisp}), sua derivada é
+
+\begin{equation}\label{vdoisp}
+\begin{array}{lll}
+\dot{V}_2	&	=	&	\dot{V}_1+z_2\dot{z}_2				\\
+					&	=	&	-c_1z^2_1+z_2\left(z_1+z_3+\alpha_2-\dfrac{\partial{}\alpha_1}{\partial{}x_1}x_2-\dfrac{\partial{}\alpha_1}{\partial{}y_r}\dot{y}_r\right).							\\
+\end{array}
+\end{equation}
+Assim como no passo anterior, escolhe-se 
+
+\begin{equation}\label{alfadois}
+\alpha_2=-c_2z_2-z_1+\dfrac{\partial{}\alpha_1}{\partial{}x_1}x_2+\dfrac{\partial{}\alpha_1}{\partial{}y_r}\dot{y}_r
+\end{equation}
+e, substituindo (\ref{alfadois}) em (\ref{vdoisp}), obtém-se
+
+\begin{equation}\label{vdoisp2}
+\dot{V}_2=-c_1z^2_1-c_2z^2_2+z_2z_3.
+\end{equation}
+
+Por conseguinte, o termo $z_2z_3$, de sinal indefinido, só será cancelado no passo seguinte.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{description}
+\item[Passo 3.] Desta vez $x_4$ será a variável de controle restando definir o erro como
+\end{description}
+
+
+\begin{equation}\label{zquatro}
+z_4=x_4-\dddot{y}_r-\alpha_3
+\end{equation}
+e, reescrevendo $\dot{x}_3$ com base em (\ref{sistn}) e (\ref{zquatro})
+
+\begin{equation}\label{xstresp}
+\dot{x}_3=z_4+\dddot{y}_r+\alpha_3.
+\end{equation}
+obtendo-se a derivada de $z_3$ com base em (\ref{zquatro}) e (\ref{xstresp}) tem-se
+
+\begin{equation} \label{ztresp}
+\begin{array}{lll}
+\dot{z}_3	& =	&	\dot{x}_3-\dddot{y}_r-\dot{\alpha}_2	\\
+					& =	&	z_4+\dddot{y}_r+\alpha_3-\dddot{y}_r-\dfrac{\partial{}\alpha_2}{\partial{}x_1}\dot{x}_1-\dfrac{\partial{}\alpha_2}{\partial{}x_2}\dot{x}_2-\dfrac{\partial{}\alpha_2}{\partial{}y_r}\dot{y}_r-\dfrac{\partial{}\alpha_2}{\partial{}\dot{y}_r}\ddot{y}_r								\\
+					&	=	&	z_4+\alpha_3-\dfrac{\partial{}\alpha_2}{\partial{}x_1}x_2-\dfrac{\partial{}\alpha_2}{\partial{}x_2}x_3-\dfrac{\partial{}\alpha_2}{\partial{}y_r}\dot{y}_r-\dfrac{\partial{}\alpha_2}{\partial{}\dot{y}_r}\ddot{y}_r.								\\
+\end{array}
+\end{equation}
+Definindo a candidata à função de Lyapunov
+
+\begin{equation}\label{vtres}
+V_3=V_2+\dfrac{1}{2}z^2_3
+\end{equation}
+sua derivada é
+
+\begin{equation}\label{vtresp}
+\dot{V}_3=\dot{V}_2+z_3\dot{z}_3
+\end{equation}
+e substituindo (\ref{ztresp}) e (\ref{vtres})
+
+\begin{equation} \label{vtrespp}
+\dot{V}_3=-c_1z^2_1-c_2z^2_2+z_3\left(z_2+z_4+\alpha_3-\dfrac{\partial{}\alpha_2}{\partial{}x_1}x_2-\dfrac{\partial{}\alpha_2}{\partial{}x_2}x_3-\dfrac{\partial{}\alpha_2}{\partial{}y_r}\dot{y}_r-\dfrac{\partial{}\alpha_2}{\partial{}\dot{y}_r}\ddot{y}_r\right),							\\
+\end{equation}
+e, escolhendo desta forma
+
+\begin{equation}\label{alfatres}
+\alpha_3=-c_3z_3-z_2+\dfrac{\partial{}\alpha_2}{\partial{}x_1}x_2+\dfrac{\partial{}\alpha_2}{\partial{}x_2}x_3+\dfrac{\partial{}\alpha_2}{\partial{}y_r}\dot{y}_r+\dfrac{\partial{}\alpha_2}{\partial{}\dot{y}_r}\ddot{y}_r
+\end{equation}
+e, substituindo (\ref{alfatres}) em (\ref{vtresp}) obtém-se
+
+
+\begin{equation}\label{vtresp2}
+\dot{V}_3=-c_1z^2_1-c_2z^2_2-c_3z^2_3+z_3z_4.
+\end{equation}
+
+Ao final deste terceiro passo já é possível observar um padrão nas funções de estabilização e nas funções de energia. Reitera-se que as leis de adaptação dos parâmetros e o sinal de controle só serão definidos no último passo do projeto, bem como o cancelamento dos termos de sinal indefinido.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{description}
+\item[Passo i.] Baseado nos passos anteriores, define-se
+\end{description}
+
+\begin{equation}\label{zi}
+z_i=x_i-y^{(i-1)}_r-\alpha_{i-1}
+\end{equation}
+
+\begin{equation}\label{alfai}
+\alpha_i=-c_iz_i-z_{i-1}+\displaystyle\sum_{k=1}^{i-1}\left(\dfrac{\partial{}\alpha_{i-1}}{\partial{}x_k}x_{k+1}+\dfrac{\partial{}\alpha_{i-1}}{\partial{}y^{(k-1)}_r}y^{(k)}_r\right)
+\end{equation}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{description}
+\item[Passo n.] Introduzindo
+\end{description}
+
+\begin{equation}\label{zn}
+z_n=x_n-y^{(n-1)}_r-\alpha_{n-1}
+\end{equation}
+e, usando a equação (\ref{xnp}), a derivada de $z_n$ é descrita por
+
+\begin{equation} \label{znp}
+\begin{array}{lll}
+\dot{z}_n	& =	&	\dot{x}_n-y^{(n)}_r-\dot{\alpha}_{n-1}	\\
+					& =	&	-\textbf{a}^T\textbf{x}+ku-y^{(n)}_r-\displaystyle\sum_{k=1}^{n-1}\left(\dfrac{\partial{}\alpha_{n-1}}{\partial{}x_k}x_{k+1}+\dfrac{\partial{}\alpha_{n-1}}{\partial{}y^{(k-1)}_r}y^{(k)}_r\right)								\\
+\end{array}
+\end{equation}
+Define-se
+
+\begin{equation}\label{uu}
+u=\hat{\varrho}\bar{u}
+\end{equation}
+onde $\hat{\varrho}$ é a estimativa de $1/k$.
+
+Propõe-se agora uma candidata à função de Lyapunov que depende do erro de estimação dos parâmetros, além das variáveis de erro definidas nos passos anteriores.
+
+\begin{equation}\label{vnn}
+V_n=V_{n-1}+\dfrac{1}{2}z^2_n+\dfrac{1}{2}\tilde{\textbf{a}}^T\Gamma^{-1}\tilde{\textbf{a}}+\dfrac{|k|}{2\gamma}\tilde{\varrho}^2
+\end{equation}
+com $\Gamma^{-1}>0$ e $\gamma>0$, e ainda
+
+\begin{equation} \label{partil}
+\begin{array}{cc}
+\tilde{\textbf{a}}=\textbf{a}-\hat{\textbf{a}} \\
+\tilde{\varrho}=\varrho-\hat{\varrho}.\\
+\end{array}
+\end{equation}
+A derivada de $V_n$ é dada por
+
+\begin{equation}\label{vnp}
+\dot{V}_n=\dot{V}_{n-1}+z_n\dot{z}_n-\tilde{\textbf{a}}^T\Gamma^{-1}\dot{\hat{\textbf{a}}}-\dfrac{|k|}{\gamma}\tilde{\varrho}\dot{\hat{\varrho}}
+\end{equation}
+e, substituindo-se (\ref{znp}) em (\ref{vnp}) tem-se
+
+\begin{equation}\label{vnpp}
+\begin{array}{lll}
+\dot{V}_n	& =	&	-\displaystyle\sum_{k=1}^{n-1}c_kz^2_k+z_n\left[z_{n-1}-\textbf{a}^T\textbf{x}+ku-y^{(n)}_r\right.																																									\\
+					&		& \left.-\displaystyle\sum_{k=1}^{n-1}\left(\dfrac{\partial{}\alpha_{n-1}}{\partial{}x_k}x_{k+1}+\dfrac{\partial{}\alpha_{n-1}}{\partial{}y^{(k-1)}_r}y^{(k)}_r\right)\right]-\tilde{\textbf{a}}^T\Gamma^{-1}\dot{\hat{\textbf{a}}}-\dfrac{|k|}{\gamma}\tilde{\varrho}\dot{\hat{\varrho}}																																																																											\\
+					&	=	&		-\displaystyle\sum_{k=1}^{n-1}c_kz^2_k+z_n\left[z_{n-1}-\textbf{a}^T\textbf{x}+\bar{u}-k\tilde{\varrho}\bar{u}-y^{(n)}_r\right.																																																																								\\
+					&		& \left.-\displaystyle\sum_{k=1}^{n-1}\left(\dfrac{\partial{}\alpha_{n-1}}{\partial{}x_k}x_{k+1}+\dfrac{\partial{}\alpha_{n-1}}{\partial{}y^{(k-1)}_r}y^{(k)}_r\right)\right]-\tilde{\textbf{a}}^T\Gamma^{-1}\dot{\hat{\textbf{a}}}-\dfrac{|k|}{\gamma}\tilde{\varrho}\dot{\hat{\varrho}}																													\\
+\end{array}
+\end{equation}
+
+O sinal de controle auxiliar já pode ser definido como
+
+\begin{equation} \label{ubarn}
+\bar{u}=-c_nz_n-z_{n-1}+\hat{\textbf{a}}^T\textbf{x}+y^{(n)}_r+\displaystyle\sum_{k=1}^{n-1}\left(\dfrac{\partial{}\alpha_{n-1}}{\partial{}x_k}x_{k+1}+\dfrac{\partial{}\alpha_{n-1}}{\partial{}y^{(k-1)}_r}y^{(k)}_r\right)
+\end{equation}
+e, substituindo (\ref{ubarn}) em (\ref{vnp}), obtém-se
+
+\begin{equation}\label{vnp2}
+\begin{array}{lll}
+\dot{V}_n	&	=	&	-\displaystyle\sum_{k=1}^{n}c_kz^2_k-\tilde{\textbf{a}}^T\Gamma^{-1}\left(\dot{\hat{\textbf{a}}}+\Gamma{}z_n\textbf{x}\right)-\dfrac{|k|}{\gamma}\tilde{\varrho}\left(\dot{\hat{\varrho}}+\gamma{}\dfrac{k}{|k|}z_n\bar{u}\right). \\	
+\end{array}
+\end{equation}
+
+As leis de adaptação dos parâmetros podem ser definidas como
+
+\begin{equation} \label{achp}
+\dot{\hat{\textbf{a}}}=-\Gamma{z_n}\textbf{x};
+\end{equation}
+
+\begin{equation} \label{vrchp}
+\dot{\hat{\varrho}}=-\gamma{}sgn(k)z_n\bar{u}.
+\end{equation}
+
+
+Substituindo (\ref{achp}) e (\ref{vrchp}) em (\ref{vnp2}), tem-se
+
+\begin{equation}\label{vnp3}
+\dot{V}_n=-\displaystyle\sum_{k=1}^{n}c_kz^2_k\leq0
+\end{equation}
+que se torna semi-definida negativa.
+
+Baseando-se na Teoria de Estabilidade de Lyapunov, o resultado da equação (\ref{vnp3}) garante que $[\begin{array}{cccccc}z_1 & z_2 & \cdots & z_n & \tilde{\textbf{a}}	& \tilde{\varrho}\end{array}]^T=[\begin{array}{cccccc}0 & 0 & \cdots & 0 & 0	&	0\end{array}]^T$ é um ponto de equilíbrio estável. E mais, através do teorema de LaSalle-Yoshizawa \cite{KOK95} pode se dizer que $z\rightarrow0$ quando $t\rightarrow\infty$.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% MUDAR REFERENCIA DA FIGURA%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+A Figura \ref{123} permite ver com mais clareza como funciona o controlador acima projetado.
+
+\begin{figure}[htp]
+\begin{center}
+\includegraphics[scale=0.5]{vsabcon/blocosABC.pdf}
+\caption{Diagrama de Blocos do Controlador Adaptativo \textit{Backstepping}}
+\label{123}
+\end{center}
+\end{figure}
+
+\section{Controlador Adaptativo \textit{Backstepping} a Estrutura Variável}
+
+Tomando como base os passos descritos na seção anterior, as leis chaveadas serão propostas para substituir as leis adaptativas integrais (\ref{achp}) e (\ref{vrchp}). Nomeando agora uma nova candidata a função de Lyapunov
+
+\begin{equation}\label{vnn}
+V_n=V_{n-1}+\dfrac{1}{2}z^2_n
+\end{equation}
+sua derivada é
+
+\begin{equation}\label{vnnp}
+\begin{array}{lll}
+\dot{V}_n	&	=	& 	\dot{V}_{n-1}+z_n\dot{z}_n				 																				\\
+\end{array}
+\end{equation}
+e, substituindo (\ref{znp}), (\ref{partil}) e (\ref{ubarn}) em (\ref{vnnp}), tem-se
+
+\begin{equation}\label{vnnp2}
+\begin{array}{lll}
+\dot{V}_n	&	=	&-\displaystyle\sum_{k=1}^{n-1}c_kz^2_k+z_n\left[z_{n-1}-\textbf{a}^T\textbf{x}+\bar{u}-k\tilde{\varrho}\bar{u}-y^{(n)}_r-\right.																									\\
+					&		& \left.\displaystyle\sum_{k=1}^{n-1}\left(\dfrac{\partial{}\alpha_{n-1}}{\partial{}x_k}x_{k+1}+\dfrac{\partial{}\alpha_{n-1}}{\partial{}y^{(k-1)}_r}y^{(k)}_r\right)\right]						 \\
+					&	=	&-\displaystyle\sum_{k=1}^{n}c_kz^2_k-z_n\left(\textbf{a}^T\textbf{x}-\hat{\textbf{a}}^T\textbf{x}\right)-z_n\left(k\varrho\bar{u}-k\hat{\varrho}\bar{u}\right)									\\	\end{array}
+\end{equation}
+
+Neste caso, o objetivo não é eliminar os termos de sinal indefinido e sim dominá-los de forma que $\dot{V}_n$ seja definida negativa. Para isso são escolhidas as leis chaveadas abaixo
+
+\begin{equation} \label{ach}
+\begin{array}{ccc}
+\hat{a}_i=-\bar{a}_isgn(z_nx_{i+1}), & \bar{a}_i>|a_i|, & i= 0, 1, \cdots, n-1\\
+\end{array}
+\end{equation}
+
+\begin{equation} \label{vrch}
+\begin{array}{cc}
+\hat{\varrho}=-\bar{\varrho}sgn(k)sgn(z_n\bar{u}), & \bar{\varrho}>|\varrho|
+\end{array}
+\end{equation}
+e, substituindo agora (\ref{ach}) e (\ref{vrch}) em (\ref{vnnp2}), obtém-se
+
+\begin{equation}\label{vnnnp2}
+\dot{V}_n\leq-\displaystyle\sum_{k=1}^{n}c_kz^2_k<0.
+\end{equation}
+
+Mais uma vez, de acordo com a Teoria de Estabilidade de Lyapunov e, pela equação (\ref{vnnnp2}) é possível afirmar que $[\begin{array}{cccc}z_1 & z_2 & \cdots & z_n\end{array}]^T=[\begin{array}{cccccc}0 & 0 & \cdots & 0\end{array}]^T$ é um ponto de equilíbrio globalmente assintoticamente estável.
+
+Assim como no Capítulo \ref{Cap:VSABCO}, analisando as equações (\ref{ach}), (\ref{vrch}) e (\ref{ubarn}), durante a obtenção de $\hat{\varrho}$ através de leis chaveadas e do sinal de controle auxiliar, observa-se a presença de termo que pode resultar em um cálculo da função sinal de sinal. Contudo, mais uma vez, é possível resolver este problema matematicamente. Substituindo a equação (\ref{ubarn}) em (\ref{vrch}), obtém-se
+
+\begin{equation} \label{vrch2}
+\begin{array}{lll}
+\hat{\varrho}	& =	&	-\bar{\varrho}sgn(k)sgn\left\{z_n\left[-c_nz_n-z_{n-1}+\hat{\textbf{a}}^T\textbf{x}+y^{(n)}_r\right.\right. \\
+							&		& \left.\left.+\displaystyle\sum_{k=1}^{n-1}\left(\dfrac{\partial{}\alpha_{n-1}}{\partial{}x_k}x_{k+1}+\dfrac{\partial{}\alpha_{n-1}}{\partial{}y^{(k-1)}_r}y^{(k)}_r\right)\right]\right\} \\
+							&	=	& -\bar{\varrho}sgn(k)sgn\left[-c_nz^2_n-z_nz_{n-1}+z_n\hat{\textbf{a}}^T\textbf{x}+z_ny^{(n)}_r\right.	\\
+							&		&	\left.+\displaystyle\sum_{k=1}^{n-1}\left(\dfrac{\partial{}\alpha_{n-1}}{\partial{}x_k}x_{k+1}+\dfrac{\partial{}\alpha_{n-1}}{\partial{}y^{(k-1)}_r}y^{(k)}_r\right)z_n\right]			\\
+\end{array}
+\end{equation}
+e, substituindo (\ref{ach}) em (\ref{vrch}), chega-se a
+
+\begin{equation} \label{vrch3}
+\begin{array}{lll}
+\hat{\varrho}	& =	& -\bar{\varrho}sgn(k)sgn\left[-c_nz^2_n-z_nz_{n-1}-\bar{a}_0sgn(z_nx_1)z_nx_1-\cdots-\bar{a}_{n-1}sgn(z_nx_n)z_nx_n\right. \\
+							&		&							\left.+z_ny^{(n)}_r+\displaystyle\sum_{k=1}^{n-1}\left(\dfrac{\partial{}\alpha_{n-1}}{\partial{}x_k}x_{k+1}+\dfrac{\partial{}\alpha_{n-1}}{\partial{}y^{(k-1)}_r}y^{(k)}_r\right)z_n\right]			\\
+							&	=	& -\bar{\varrho}sgn(k)sgn\left[-c_nz^2_n-z_nz_{n-1}-\bar{a}_0|z_nx_1|-\cdots-\bar{a}_{n-1}|z_nx_n|\right. \\
+							&		&	\left.+z_ny^{(n)}_r+\displaystyle\sum_{k=1}^{n-1}\left(\dfrac{\partial{}\alpha_{n-1}}{\partial{}x_k}x_{k+1}+\dfrac{\partial{}\alpha_{n-1}}{\partial{}y^{(k-1)}_r}y^{(k)}_r\right)z_n\right]			\\
+\end{array}
+\end{equation}
+
+
+
+
+\begin{figure}[htp]\label{bloc002}
+\begin{center}
+\includegraphics[scale=0.5]{vsabcon/blocosVSABC.pdf}
+\caption{Diagrama de Blocos do Controlador Adaptativo \textit{Backstepping} a Estrutura Variável}
+\end{center}
+\end{figure}
+
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Resumo dos Controladores}
+
+A Tabela \ref{tab:resumo2} apresenta uma síntese das equações desenvolvidas para os controladores deste capítulo.
+\begin{table}[htbp]
+	\caption{Resumo dos controladores adaptativos \textit{backstepping} e VS-ABC para plantas com grau relativo $n$ e sem zeros.}
+	\large
+	\centering
+		\begin{tabular}{cccc}
+		\hline
+		\multicolumn{4}{|c|}{\textbf{Equações Comuns}} \\
+		\hline		
+		\multicolumn{4}{|l|}{Erros de Saída} \\
+		\multicolumn{4}{|l|}{$z_i=x_i-y^{(i-1)}_r-\alpha_{i-1}$}\\
+		\hline
+		\multicolumn{4}{|l|}{Funções de Estabilização:}\\                 	  \multicolumn{4}{|l|}{$\alpha_i=-c_iz_i-z_{i-1}+\displaystyle\sum_{k=1}^{i-1}\left(\dfrac{\partial{}\alpha_{i-1}}{\partial{}x_k}x_{k+1}+\dfrac{\partial{}\alpha_{i-1}}{\partial{}y^{(k-1)}_r}y^{(k)}_r\right)$}\\
+		\hline
+		\multicolumn{4}{|l|}{Sinal de Controle:} \\
+		\multicolumn{4}{|l|}{$u=\hat{\varrho}\bar{u}$} \\
+		\multicolumn{4}{|l|}{$\bar{u}=-c_nz_n-z_{n-1}+\hat{\textbf{a}}^T\textbf{x}+y^{(n)}_r+\displaystyle\sum_{k=1}^{n-1}\left(\dfrac{\partial{}\alpha_{n-1}}{\partial{}x_k}x_{k+1}+\dfrac{\partial{}\alpha_{n-1}}{\partial{}y^{(k-1)}_r}y^{(k)}_r\right)$} \\
+		\hline
+		\multicolumn{4}{|l|}{Observador: ver tabela \ref{tab:obs}}\\
+		\hline
+		\multicolumn{4}{|c|}{\textbf{Controlador Adaptativo \textit{Backstepping}}} \\
+		\hline
+		\multicolumn{4}{|l|}{Leis Adaptativas:} \\
+		\multicolumn{4}{|l|}{$\dot{\hat{\textbf{a}}}=-\Gamma{z_n}\textbf{x}$} \\
+		\multicolumn{4}{|l|}{$\dot{\hat{\varrho}}=-\gamma{}sgn(k)z_n\bar{u}$} \\	
+		\hline
+		\multicolumn{4}{|c|}{\textbf{Controlador Adaptativo \textit{Backstepping} a Estrutura Variável}} \\
+		\hline
+		\multicolumn{4}{|l|}{Leis Chaveadas:} \\
+		\multicolumn{4}{|l|}{$\hat{a}_i=-\bar{a}_isgn(z_nx_{i+1}),\bar{a}_i>|a_i|$} \\
+		\multicolumn{4}{|l|}{$\hat{\varrho}=-\bar{\varrho}sgn(k)sgn(z_n\bar{u}),\bar{\varrho}>|\varrho|$}\\
+		\hline
+		\end{tabular}
+		\label{tab:resumo2}
+\end{table}
+
+
+\section{Resultado das Simulações}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% MUDAR REFERENCIA DA FIGURA%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Analisando o sistema massa-mola-amortecedor representado na Figura \ref{fig:abcd}, onde $M=20kg$, $B=0,1kg/s$ e $K=5kg/s^2$, obtém-se a seguinte função de transferência
+
+\begin{figure}[!]
+\begin{center}
+\includegraphics[scale=0.4]{vsabcon/planta.png}
+\caption{Sistema Massa-Mola-Amortecedor}
+\label{fig:abcd}
+\end{center}
+\end{figure}
+
+\begin{equation} \label{MKBft}
+\frac{y(s)}{u(s)}=\frac{1/M}{s^2+B/Ms+K/M}.
+\end{equation}
+O modelo de referência é dado por
+
+\begin{equation} \label{modeloGRN}
+\frac{y_r(s)}{r(s)}=\dfrac{0,0004}{(s+0,04)^2}.
+\end{equation}
+A escolha deste modelo deve-se ao fato da planta ser muito lenta e oscilatória. O modelo não deve ser muito mais rápido que a planta, pois, o sinal de controle necessário para fazer uma planta lenta seguir um modelo rápido é muito alto.
+
+As variáveis de estado da planta (\ref{MKBft}) são obtidas pelo observador descrito na Tabela \ref{tab:obs} com os seguintes valores:
+
+\begin{equation} \label{gamadapn}
+\Gamma=\left[
+\begin{array}{ccc}
+9		&	0		&	0		\\
+0		&	10	& 0		\\
+0		&	0		&	20	\\
+\end{array}
+\right].
+\end{equation}
+
+As condições iniciais dos parâmetros são $\theta_1(0)=0,005$, $\theta_2(0)=0,0005$ e $\theta_3(0)=0,025$. E ainda $\Lambda(s)=s^2+2s+1$. Por fim $a^*_0=3$ e $a^*_1=9$.
+
+Nas Figuras \ref{fig11n} e \ref{fig12n} apresentam-se, respectivamente, o comportamento da saída do sistema considerando que as variáveis de estado estão disponíveis para medição e, o sinal de controle para o controlador adaptativo \textit{backstepping}. Nas Figuras \ref{fig21n} e \ref{fig22n} são exibidas as mesmas respostas do caso anterior, todavia neste caso as variáveis de estado são obtidas por um observador. Em ambas as situações, os ganhos adaptativos utilizados foram $\gamma_1=\gamma_2=\gamma=20$, as constantes auxiliares $c_1=c_2=4$, o sinal de entrada do modelo de referência é $r(t)=1$, as condições iniciais da planta são $x_1=0,5$ e $x_2=0$ e, finalmente, as condições iniciais dos parâmetros do controlador são nulas.
+
+Já nas Figuras \ref{fig31n} e \ref{fig32n} os resultados mostrados são para o VS-ABC considerando as variáveis de estado disponíveis para medição. Finalmente, as Figuras \ref{fig41n} e \ref{fig42n} mostram os resultados do VS-ABC com as variáveis de estado estimadas por um observador. As amplitudes dos relés em ambos os casos são $\bar{a}_0=\bar{a}_1=3$ e $\bar{\varrho}=21$.
+
+Os resultados comprovam que ambos os controladores funcionam de modo semelhante, tanto quando as variáveis de estado são conhecidas quanto quando são estimadas por um observador. No entanto, é importante ressaltar que o desempenho dos controladores sem o observador é melhor de que com o observador. Da mesma maneira, o desempenho do VS-ABC é melhor que o ABC.
+
+\begin{figure}[hp] \begin{center}
+% fbox faz uma borda ao redor do seu argumento
+\subfigure[\label{fig11n}]{\includegraphics[scale=0.4]{vsabcon/GRN/yxym_abc_estados_conhecidos}}
+\subfigure[\label{fig12n}]{\includegraphics[scale=0.4]{vsabcon/GRN/u_abc_estados_conhecidos}}
+\caption{Saída do sistema e do modelo de referência do controlador adaptativo \textit{backstepping} com as variáveis de estado conhecidas (a), e sinal de controle na entrada da planta (b).}
+\label{fig1n}
+\end{center} \end{figure}
+
+\begin{figure}[hp] \begin{center}
+% fbox faz uma borda ao redor do seu argumento
+\subfigure[\label{fig21n}]{\includegraphics[scale=0.4]{vsabcon/GRN/yxym_abc_observador}}
+\subfigure[\label{fig22n}]{\includegraphics[scale=0.4]{vsabcon/GRN/u_abc_observador}}
+\caption{Saída do sistema e do modelo de referência do controlador adaptativo \textit{backstepping} com as variáveis de estado estimadas por um observador (a), e sinal de controle na entrada da planta (b).}
+\label{fig2n}
+\end{center} \end{figure}
+
+\begin{figure}[hp] \begin{center}
+% fbox faz uma borda ao redor do seu argumento
+\subfigure[\label{fig31n}]{\includegraphics[scale=0.4]{vsabcon/GRN/yxym_vsabc_estados_conhecidos}}
+\subfigure[\label{fig32n}]{\includegraphics[scale=0.4]{vsabcon/GRN/u_vsabc_estados_conhecidos}}
+\caption{Saída do sistema e do modelo de referência do VS-ABC com as variáveis de estado conhecidas (a), e sinal de controle na entrada da planta (b).}
+\label{fig3n}
+\end{center} \end{figure}
+
+\begin{figure}[hp] \begin{center}
+% fbox faz uma borda ao redor do seu argumento
+\subfigure[\label{fig41n}]{\includegraphics[scale=0.4]{vsabcon/GRN/yxym_vsabc_observador}}
+\subfigure[\label{fig42n}]{\includegraphics[scale=0.4]{vsabcon/GRN/u_vsabc_observador}}
+\caption{Saída do sistema e do modelo de referência do VS-ABC com as variáveis de estado estimadas por um observador (a), e sinal de controle na entrada da planta (b).}
+\label{fig4n}
+\end{center} \end{figure}

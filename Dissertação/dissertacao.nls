@@ -1,0 +1,60 @@
+\begin{thenomenclature} 
+
+ \nomgroup{A}
+
+  \item [{APPC:}]\begingroup Adaptive Pole Placement Controller (Controlador Adaptativo por Posicionamento de Pólos)\nomeqref {1.0}
+		\nompageref{2}
+
+ \nomgroup{D}
+
+  \item [{DMARC:}]\begingroup Dual Mode Adaptive Robust Controller (Controlador em Modo Dual Adaptativo Robusto)\nomeqref {1.0}
+		\nompageref{2}
+
+ \nomgroup{F}
+
+  \item [{FE:}]\begingroup Função de Estabilização\nomeqref {4.5}
+		\nompageref{48}
+
+ \nomgroup{I}
+
+  \item [{IDMARC:}]\begingroup Indirect Dual Mode Adaptive Robust Controller (Controlador em Modo Dual Adaptativo Robusto Indireto)\nomeqref {1.0}
+		\nompageref{2}
+  \item [{ISS:}]\begingroup Input-to-State Stability (Estabilidade Entrada-para-Estado)\nomeqref {1.1}
+		\nompageref{5}
+  \item [{IVS-MRAC:}]\begingroup Indirect Variable Structure Model Reference Adaptive Controller (Controlador Adaptativo Indireto por Modelo de Referência e Estrutura Variável)\nomeqref {1.0}
+		\nompageref{2}
+
+ \nomgroup{L}
+
+  \item [{LTI:}]\begingroup Linear Time Invariant (Linear e Invariante no Tempo)\nomeqref {3.0}
+		\nompageref{17}
+
+ \nomgroup{M}
+
+  \item [{M/VS-ABC:}]\begingroup Modular VS-ABC (VS-ABC Modular)\nomeqref {1.0}
+		\nompageref{3}
+  \item [{MRAC:}]\begingroup Model Reference Adaptive Controller (Controlador Adaptativo por Modelo de Referência)\nomeqref {1.0}
+		\nompageref{2}
+
+ \nomgroup{S}
+
+  \item [{SG:}]\begingroup Small Gain (Pequeno Ganho)\nomeqref {1.1}
+		\nompageref{5}
+  \item [{SISO:}]\begingroup Single Input Single Output (Monovariável)\nomeqref {3.0}
+		\nompageref{17}
+
+ \nomgroup{T}
+
+  \item [{T/VS-ABC:}]\begingroup Tuning Functions VS-ABC (VS-ABC por Funções de Sintonia)\nomeqref {1.0}
+		\nompageref{3}
+
+ \nomgroup{V}
+
+  \item [{VS-ABC:}]\begingroup Variable Structure Adaptive Backstepping Controller (Controlador Adaptativo Backstepping a Estrutura Variável\nomeqref {1.0}
+		\nompageref{2}
+  \item [{VS-APPC:}]\begingroup Variable Structure Adaptive Pole Placement Controller (Controlador Adaptativo por Posicionamento de Pólos e Estrutura Variável)\nomeqref {1.0}
+		\nompageref{2}
+  \item [{VS-MRAC:}]\begingroup Variable Structure Model Reference Adaptive Controller (Controlador Adaptativo por Modelo de Referência e Estrutura Variável)\nomeqref {1.0}
+		\nompageref{2}
+
+\end{thenomenclature}

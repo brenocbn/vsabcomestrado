@@ -1,0 +1,269 @@
+\providecommand{\abntreprintinfo}[1]{%
+ \citeonline{#1}}
+\setlength{\labelsep}{0pt}\begin{thebibliography}{}
+\providecommand{\abntrefinfo}[3]{}
+\providecommand{\abntbstabout}[1]{}
+\abntbstabout{1.45.2.1 }
+
+\bibitem[Araujo 1993]{ARA93}
+\abntrefinfo{Araujo}{ARAUJO}{1993}
+{ARAUJO, A.~D.
+\emph{Contribuição à Teoria de Controle Adaptativo por Modelo de Referência e
+  Estrutura Variável: Uma Abordagem Entrada/Saída}.
+Tese (Tese de Doutorado) --- Universidade Federal do Rio de Janeiro, Rio de
+  Janeiro, Brasil, 1993.}
+
+\bibitem[Arcese et al. 2010]{ARC10}
+\abntrefinfo{Arcese et al.}{ARCESE et al.}{2010}
+{ARCESE, L. et al. {High Gain Observer for Backstepping Control of a MRI-guied
+  Therapeutic Microrobot in Blood Vessels}.
+\emph{International Conference on Biomedical Robotics and Biomechatronics}, p.
+  349--354, 2010.}
+
+\bibitem[Bartolini et al. 1996]{BAR96}
+\abntrefinfo{Bartolini et al.}{BARTOLINI et al.}{1996}
+{BARTOLINI, G. et al. {A Combined Backstepping/Second Order Sliding Mode
+  Approach to Control a Class of Nonlinear Systems}.
+\emph{IEEE International Workshop on Variable Structure Systems}, p. 205--210,
+  1996.}
+
+\bibitem[Bazanella e Silva Jr. 2005]{BAZ05}
+\abntrefinfo{Bazanella e Silva Jr.}{BAZANELLA; SILVA JR.}{2005}
+{BAZANELLA, A.~S.; SILVA JR., J. M.~G. \emph{Sistemas de Controle: Princípios e
+  Métodos de Projeto}. [S.l.]: Editora da UFRGS, 2005.}
+
+\bibitem[Cunha, Araujo e Mota 2006]{CUNH06}
+\abntrefinfo{Cunha, Araujo e Mota}{CUNHA; ARAUJO; MOTA}{2006}
+{CUNHA, C.~D.; ARAUJO, A.~D.; MOTA, F.~C. {A Dual-Mode Adaptive Robust
+  Controller for Plants with Relative Degree One: Stability Analysis}.
+\emph{American Control Conference}, p.~1--6, 2006.}
+
+\bibitem[Hsu e Costa 1989]{HSUC89}
+\abntrefinfo{Hsu e Costa}{HSU; COSTA}{1989}
+{HSU, L.; COSTA, R.~R. {Variable Structure Model Reference Adaptive Control
+  Using Only Input and Output Measurements: Part I}.
+\emph{International Journal of Control}, v.~49, n.~2, p. 399--416, 1989.}
+
+\bibitem[Ioannou e Sun 1996]{IOA96}
+\abntrefinfo{Ioannou e Sun}{IOANNOU; SUN}{1996}
+{IOANNOU, P.~A.; SUN, J. \emph{Robust Adaptive Control}. 1ª. ed. [S.l.]:
+  Prentice-Hall, 1996.}
+
+\bibitem[Kanellakopoulos 1991]{KANE91}
+\abntrefinfo{Kanellakopoulos}{KANELLAKOPOULOS}{1991}
+{KANELLAKOPOULOS, I.
+\emph{Adaptive Control of Nonlinear Systems}.
+Tese (Tese de Doutorado) --- Universidade de Illinois, Illinois, USA, 1991.}
+
+\bibitem[Kanellakopoulos, Kokotovic e Morse 1991]{KAN91}
+\abntrefinfo{Kanellakopoulos, Kokotovic e Morse}{KANELLAKOPOULOS; KOKOTOVIC;
+  MORSE}{1991}
+{KANELLAKOPOULOS, I.; KOKOTOVIC, P.~V.; MORSE, A.~S. {Adaptive Output-Feedback
+  Nonlinear Systems}.
+\emph{Conference on Decision and Control}, p. 1082--1087, 1991.}
+
+\bibitem[Kanellakopoulos, Krstic e Kokotovic 1991]{KAN93}
+\abntrefinfo{Kanellakopoulos, Krstic e Kokotovic}{KANELLAKOPOULOS; KRSTIC;
+  KOKOTOVIC}{1991}
+{KANELLAKOPOULOS, I.; KRSTIC, M.; KOKOTOVIC, P.~V. {K-Adaptive Control of
+  Output Feedback Control of a Class of Nonlinear Systems}.
+\emph{Conference on Decision and Control}, p. 1061--1066, 1991.}
+
+\bibitem[Kokotovic, Krstic e Kanellakopoulos 1995]{KOK95}
+\abntrefinfo{Kokotovic, Krstic e Kanellakopoulos}{KOKOTOVIC; KRSTIC;
+  KANELLAKOPOULOS}{1995}
+{KOKOTOVIC, P.~V.; KRSTIC, M.; KANELLAKOPOULOS, I. \emph{Nonlinear and Adaptive
+  Control Design}. [S.l.]: John Wiley Professional, 1995.}
+
+\bibitem[Kreisselmeier e Anderson 1977]{KREI77}
+\abntrefinfo{Kreisselmeier e Anderson}{KREISSELMEIER; ANDERSON}{1977}
+{KREISSELMEIER, G.; ANDERSON, B. D.~O. {Adaptive Observers with Exponencial
+  Rate of Convergence}.
+\emph{IEEE Transactions on Automatic Control}, v.~22, p.~2--8, 1977.}
+
+\bibitem[Krstic, Kanellakopoulos e Kokotovic 1992]{KRS92}
+\abntrefinfo{Krstic, Kanellakopoulos e Kokotovic}{KRSTIC; KANELLAKOPOULOS;
+  KOKOTOVIC}{1992}
+{KRSTIC, M.; KANELLAKOPOULOS, I.; KOKOTOVIC, P.~V. {Adaptive Nonlinear Control
+  without Overparametrization}.
+\emph{Systems and Control Letters}, v.~19, p. 177--185, 1992.}
+
+\bibitem[Krstic, Kanellakopoulos e Kokotovic 1994]{KRS93}
+\abntrefinfo{Krstic, Kanellakopoulos e Kokotovic}{KRSTIC; KANELLAKOPOULOS;
+  KOKOTOVIC}{1994a}
+{KRSTIC, M.; KANELLAKOPOULOS, I.; KOKOTOVIC, P.~V. {Adaptive Nonlinear
+  Output-Feedback Control with an Observer-Based Identifier}.
+\emph{American Control Conference}, p. 2821--2825, 1994.}
+
+\bibitem[Krstic, Kanellakopoulos e Kokotovic 1994]{KRS94}
+\abntrefinfo{Krstic, Kanellakopoulos e Kokotovic}{KRSTIC; KANELLAKOPOULOS;
+  KOKOTOVIC}{1994b}
+{KRSTIC, M.; KANELLAKOPOULOS, I.; KOKOTOVIC, P.~V. {Nonlinear Design and
+  Adaptive Controllers for Linear Systems}.
+\emph{IEEE Transactions on Automatic Control}, AC-39, p. 752--783, 1994.}
+
+\bibitem[Krstic e Kokotovic 1995]{KRS95}
+\abntrefinfo{Krstic e Kokotovic}{KRSTIC; KOKOTOVIC}{1995}
+{KRSTIC, M.; KOKOTOVIC, P.~V. {Adaptive Nonlinear Design with
+  Controller-Identifier Separation and Swapping}.
+\emph{IEEE Transactions on Automatic Control}, v.~40, p. 426--440, 1995.}
+
+\bibitem[Lin, Shen e Hsu 2002]{LIN02}
+\abntrefinfo{Lin, Shen e Hsu}{LIN; SHEN; HSU}{2002}
+{LIN, F.~J.; SHEN, P.~H.; HSU, S.~P. {Adaptive Backstepping Sliding Mode
+  Control for Linear Induction Motor Drive}.
+\emph{IEE Proceedings - Electric Power Applications}, v.~149, p. 184--194,
+  2002.}
+
+\bibitem[Narendra, Lin e Valavani 1980]{NARL80}
+\abntrefinfo{Narendra, Lin e Valavani}{NARENDRA; LIN; VALAVANI}{1980}
+{NARENDRA, K.~S.; LIN, Y.~H.; VALAVANI, L.~S. {Stable Adaptive Controller
+  Design, Part II: Proof of Stability}.
+\emph{IEEE Transactions on Automatic Control}, AC-25, n.~3, p. 440--448, 1980.}
+
+\bibitem[Narendra e Valavani 1978]{NARV78}
+\abntrefinfo{Narendra e Valavani}{NARENDRA; VALAVANI}{1978}
+{NARENDRA, K.~S.; VALAVANI, L.~S. {Stable Adaptive Controller Design - Direct
+  Control}.
+\emph{IEEE Transactions on Automatic Control}, AC-23, n.~4, p. 570--583, 1978.}
+
+\bibitem[Nise 2011]{NISE02}
+\abntrefinfo{Nise}{NISE}{2011}
+{NISE, N.~S. \emph{Control Systems Engineering}. 5ª. ed. New York: John Wiley
+  and Sons Inc., 2011.}
+
+\bibitem[Oliveira e Araujo 2004]{OLI04}
+\abntrefinfo{Oliveira e Araujo}{OLIVEIRA; ARAUJO}{2004}
+{OLIVEIRA, J.~B.; ARAUJO, A.~D. {An Indirect Variable Structure Model Reference
+  Adaptive Control Applied to the Speed Control of a Three-Phase Induction
+  Motor}.
+\emph{American Control Conference}, p. 1946--1951, 2004.}
+
+\bibitem[Queiroz 2008]{QUEIR08}
+\abntrefinfo{Queiroz}{QUEIROZ}{2008}
+{QUEIROZ, K. I. P.~M.
+\emph{Controlador Adaptativo Backstepping a Estrutura Variável}.
+Dissertação (Dissertação de Mestrado) --- Programa de Pós-Graduação em
+  Engenharia Elétrica e Computação, Universidade Federal do Rio Grande do
+  Norte, Rio Grande do Norte, Brasil, 2008.}
+
+\bibitem[Queiroz 2011]{QUEIRA08}
+\abntrefinfo{Queiroz}{QUEIROZ}{2011}
+{QUEIROZ, K. I. P.~M.
+\emph{Análise de Estabilidade e Generalização do Controlador Adaptativo
+  Backstepping a Estrutura Variável}.
+Tese (Tese de Doutorado) --- Programa de Pós-Graduação em Engenharia Elétrica e
+  Computação, Universidade Federal do Rio Grande do Norte, Rio Grande do Norte,
+  Brasil, 2011.}
+
+\bibitem[Queiroz e Araujo 2008]{QUE08}
+\abntrefinfo{Queiroz e Araujo}{QUEIROZ; ARAUJO}{2008a}
+{QUEIROZ, K. I. P.~M.; ARAUJO, A.~D. {A Proposal for a Variable Structure
+  Adaptive Backstepping Control}.
+\emph{Proceedings of the 10th International Workshop on Variable Structure
+  Systems}, v.~1, p. 112--117, 2008.}
+
+\bibitem[Queiroz e Araujo 2008]{QUERA08}
+\abntrefinfo{Queiroz e Araujo}{QUEIROZ; ARAUJO}{2008b}
+{QUEIROZ, K. I. P.~M.; ARAUJO, A.~D. Uma proposta para um controlador
+  adaptativo backstepping a estrutura variável.
+\emph{Anais do Congresso Brasileiro de Automática}, Juiz de Fora, MG, Brasil,
+  p.~1--6, 2008.}
+
+\bibitem[Queiroz e Araujo 2008]{QUEA08}
+\abntrefinfo{Queiroz e Araujo}{QUEIROZ; ARAUJO}{2008c}
+{QUEIROZ, K. I. P.~M.; ARAUJO, A.~D. {Variable Structure Adaptive Backstepping
+  Control}.
+\emph{Proceedings of the 47th IEEE Conference on Decision and Control}, p.
+  3263--3268, 2008.}
+
+\bibitem[Rios-Bolivar e Zinober 1999]{RIB99}
+\abntrefinfo{Rios-Bolivar e Zinober}{RIOS-BOLIVAR; ZINOBER}{1999}
+{RIOS-BOLIVAR, M.; ZINOBER, A. {Dynamical Adaptive Sliding Mode Control of
+  Observable Minimum-Phase Uncertain Nonlinear Systems}.
+\emph{Variable Structure Systems, Sliding Mode and Nonlinear Control}, p.
+  211--235, 1999.}
+
+\bibitem[Sastry e Bodson 1989]{SAS89}
+\abntrefinfo{Sastry e Bodson}{SASTRY; BODSON}{1989}
+{SASTRY, S.~S.; BODSON, M. \emph{Adaptive Control: Stability, Convergence and
+  Robustness}. [S.l.]: Prentice-Hall, 1989.}
+
+\bibitem[Silva Jr., Araujo e Oliveira 2004]{SIL04}
+\abntrefinfo{Silva Jr., Araujo e Oliveira}{SILVA JR.; ARAUJO; OLIVEIRA}{2004}
+{SILVA JR., F.~C.; ARAUJO, A.~D.; OLIVEIRA, J.~B. {A Proposal for a Variable
+  Structure Adaptive Pole Placement Control}.
+\emph{IEEE International Workshop on Variable Structure Systems}, Vilanova -
+  Espanha, p.~1--5, 2004.}
+
+\bibitem[Slotine, Hedrick e Misawa 1986]{SLOT86}
+\abntrefinfo{Slotine, Hedrick e Misawa}{SLOTINE; HEDRICK; MISAWA}{1986}
+{SLOTINE, J. J.~E.; HEDRICK, J.~K.; MISAWA, E.~A. {On Sliding Observers for
+  Nonlinear Systems}.
+\emph{American Control Conference}, p. 1794--1800, 1986.}
+
+\bibitem[Stotsky, Hendrick e Yip 1997]{STO97}
+\abntrefinfo{Stotsky, Hendrick e Yip}{STOTSKY; HENDRICK; YIP}{1997}
+{STOTSKY, A.; HENDRICK, J.~K.; YIP, P.~P. {The Use of Sliding Modes to Simplify
+  the Backstepping Control Method}.
+\emph{American Control Conference}, p. 1703--1708, 1997.}
+
+\bibitem[Teixeira 2011]{LEO11}
+\abntrefinfo{Teixeira}{TEIXEIRA}{2011}
+{TEIXEIRA, L. R.~L.
+\emph{{Uma Bordagem Indireta para o Controlador em Modo Dual Adaptativo
+  Robusto}}.
+Dissertação (Dissertação de Mestrado) --- Universidade Federal do Rio Grande do
+  Norte, Natal, Brasil, 2011.}
+
+\bibitem[Utkin 1977]{UTK77}
+\abntrefinfo{Utkin}{UTKIN}{1977}
+{UTKIN, V.~I. {Variable Structure Systems with Sliding Modes}.
+\emph{IEEE Transactions on Automatic Control}, AC-22, p. 212--222, 1977.}
+
+\bibitem[Utkin 1978]{UTK78}
+\abntrefinfo{Utkin}{UTKIN}{1978}
+{UTKIN, V.~I. \emph{Sliding Modes and Their Applications in Variable Structure
+  Systems}. Moscou: Mir Publishers, 1978.}
+
+\bibitem[Utkin 1983]{UTK83}
+\abntrefinfo{Utkin}{UTKIN}{1983}
+{UTKIN, V.~I. {Variable Structure Systems: Present and Future}.
+\emph{Automation and Remote Control}, v.~44, p. 1105--1120, 1983.}
+
+\bibitem[Utkin 1987]{UTK87}
+\abntrefinfo{Utkin}{UTKIN}{1987}
+{UTKIN, V.~I. {Discontinuous Control Systems: State of Art in Theory and
+  Applications}. In:  . [S.l.: s.n.], 1987. v.~1, p. 75--94.}
+
+\bibitem[Utkin 1992]{UTK92}
+\abntrefinfo{Utkin}{UTKIN}{1992}
+{UTKIN, V.~I. \emph{Sliding Modes in Control and Optimization}. [S.l.]:
+  Springer-Verlag, 1992.}
+
+\bibitem[Utkin 1993]{UTK93}
+\abntrefinfo{Utkin}{UTKIN}{1993}
+{UTKIN, V.~I. {Sliding Mode Control Design: Principles and Applications to
+  Electric Drives}.
+\emph{IEEE Transactions on Industrial Electronics}, v.~1, n.~40, p. 23--36,
+  1993.}
+
+\bibitem[Zhang et al. 2008]{ZHA08}
+\abntrefinfo{Zhang et al.}{ZHANG et al.}{2008}
+{ZHANG, N. et al. {Backstepping Based Variable Structure Controller Design for
+  DiffServ Network}.
+\emph{American Control Conference}, p. 4451--4455, 2008.}
+
+\bibitem[Zhou, Jiang e Du 2008]{ZHOU08}
+\abntrefinfo{Zhou, Jiang e Du}{ZHOU; JIANG; DU}{2008}
+{ZHOU, L.; JIANG, C.; DU, Y. {A Backstepping Sliding Mode Control Based on
+  Fuzzy Disturbance Observer for Aerospace Vehicle}.
+\emph{Chinese Control and Decision Conference}, p. 2954--2959, 2008.}
+
+\bibitem[Zinober e Liu 1996]{ZIN96}
+\abntrefinfo{Zinober e Liu}{ZINOBER; LIU}{1996}
+{ZINOBER, A.; LIU, P. {Robust Control of Nonlinear Uncertain Systems via
+  Sliding Mode with Backstepping Design}.
+\emph{IEE UKACC International Conference on Control}, p. 281--286, 1996.}
+
+\end{thebibliography}
